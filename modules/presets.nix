@@ -1,6 +1,11 @@
 _: {
   nixpkgs.config.allowUnfree = true;
-  programs.firefox.enable = true;
+  programs.firefox = {
+    enable = true;
+    preferences = {
+      "media.default_volume" = "0.5";
+    };
+  };
 
   system.stateVersion = "25.11";
 

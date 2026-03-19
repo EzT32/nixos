@@ -22,6 +22,7 @@
       steam.enable = true;
       pinta.enable = true;
       vscode.enable = true;
+      obsidian.enable = true;
     };
   };
 }
