@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  self,
+  ...
+}:
 let
   cfg = config.modules.desktop.hyprland.hyprpaper;
 in
@@ -8,7 +13,7 @@ in
 
     path = lib.mkOption {
       type = lib.types.path;
-      default = "${config.home-manager.users.ezt.home.homeDirectory}/nix-repo/wallpapers";
+      default = "${self}/wallpapers";
       description = "Path to the directory containing wallpapers for hyprpaper.";
       example = "~/path/to/wallpaper/folder";
     };

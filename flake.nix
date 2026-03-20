@@ -13,6 +13,7 @@
 
   outputs =
     {
+      self,
       nixpkgs,
       nixpkgs-unstable,
       home-manager,
@@ -45,7 +46,7 @@
             home-manager.nixosModules.home-manager
             nixos-hardware.nixosModules.lenovo-thinkpad-e14-amd
           ];
-          specialArgs = { inherit system unstable; };
+          specialArgs = { inherit system unstable self; };
         };
 
         desktop = nixpkgs.lib.nixosSystem {
@@ -57,7 +58,7 @@
             home-manager.nixosModules.home-manager
           ];
 
-          specialArgs = { inherit system unstable; };
+          specialArgs = { inherit system unstable self; };
         };
       };
     };
