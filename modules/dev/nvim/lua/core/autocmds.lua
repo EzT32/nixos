@@ -5,7 +5,7 @@ function M.setup()
 		lua = 2,
 		nix = 2,
 		python = 4,
-		c = 3,
+		c = 2,
 	}
 
 	for ft, size in pairs(indent_settings) do
