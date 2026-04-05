@@ -41,6 +41,9 @@ in
               disable_while_typing = false;
             };
           };
+          windowrulev2 = [
+            "tile, class:^(steam)$"
+          ];
         };
       };
     };
