@@ -1,8 +1,10 @@
 { pkgs, ... }:
 {
-  services.displayManager.sddm = {
-    enable = true;
-    wayland.enable = true;
+  services = {
+    xserver.enable = true;
+    displayManager.sddm = {
+      enable = true;
+    };
     #theme = "Gruvbox";
   };
 

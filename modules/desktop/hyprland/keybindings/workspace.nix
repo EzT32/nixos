@@ -34,6 +34,12 @@ in
           "SUPERSHIFT, 8, movetoworkspace, 8"
           "SUPERSHIFT, 9, movetoworkspace, 9"
           "SUPERSHIFT, 0, movetoworkspace, 10"
+
+          # Swap workspace for screens
+          "ALTSHIFT, h, movecurrentworkspacetomonitor, l"
+          "ALTSHIFT, j, movecurrentworkspacetomonitor, d"
+          "ALTSHIFT, k, movecurrentworkspacetomonitor, u"
+          "ALTSHIFT, l, movecurrentworkspacetomonitor, r"
         ];
       };
     };
