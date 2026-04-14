@@ -11,7 +11,6 @@ _: {
     };
     kernelParams = [
       "video=HDMI-A-1:1920x1080@144"
-      "fbcon=map:1"
     ];
   };
 }

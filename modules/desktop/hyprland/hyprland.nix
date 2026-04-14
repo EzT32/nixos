@@ -22,13 +22,14 @@ in
       wayland.windowManager.hyprland = {
         enable = true;
         xwayland.enable = true;
+        systemd.enable = false;
 
         settings = {
           xwayland.force_zero_scaling = true;
 
           general = {
             gaps_in = 2;
-            gaps_out = 5;
+            gaps_out = 4;
           };
 
           input = {
