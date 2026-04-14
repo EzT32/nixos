@@ -49,11 +49,6 @@ in
             "desc:Acer Technologies KG271 TF5EE0098522, 1920x1080@143.98Hz, 0x0, auto"
             "desc:BNQ BenQ GL2450 K2E02672019, preferred, auto-right, auto"
           ];
-
-          workspace = [
-            "1, monitor:desc:Acer Technologies KG271 TF5EE0098522"
-            "2, monitor:desc:BNQ BenQ GL2450 K2E02672019"
-          ];
         };
       };
     };
