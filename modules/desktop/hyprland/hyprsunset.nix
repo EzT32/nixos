@@ -6,83 +6,47 @@
 }:
 let
   cfg = config.modules.desktop.hyprland.hyprsunset;
-  pkill-bin = "${pkgs.procps}/bin/pkill";
-  hyprsunset-bin = "${pkgs.hyprsunset}/bin/hyprsunset";
 
+  hyprctl-bin = "${pkgs.hyprland}/bin/hyprctl";
+
+  toggleScript = pkgs.writeShellScript "hyprsunset-toggle" ''
+    STATE_FILE="''${XDG_RUNTIME_DIR}/hyprsunset-on"
+
+    if [ -f "$STATE_FILE" ]; then
+      rm -f "$STATE_FILE"
+      ${hyprctl-bin} hyprsunset identity
+    else
+      touch "$STATE_FILE"
+      ${hyprctl-bin} hyprsunset temperature ${toString cfg.temperature}
+    fi
+  '';
 in
 {
   options.modules.desktop.hyprland.hyprsunset = {
-    enable = lib.mkEnableOption "Enable hyprsunset service.";
+    enable = lib.mkEnableOption "hyprsunset blue-light filter";
+
+    user = lib.mkOption {
+      type = lib.types.str;
+      default = "ezt";
+      description = "The home-manager user to configure hyprsunset for.";
+    };
+
+    temperature = lib.mkOption {
+      type = lib.types.int;
+      default = 4500;
+      description = "Colour temperature (Kelvin) applied when the warm filter is active.";
+    };
   };
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
-      hyprsunset
-    ];
+    home-manager.users.${cfg.user} = {
+      services.hyprsunset.enable = true;
 
-    home-manager.users.ezt = {
       wayland.windowManager.hyprland.settings = {
         bindl = [
-          "SUPERSHIFT, n, exec, ${pkill-bin} hyprsunset; ${hyprsunset-bin} -t 4500"
+          "SUPERSHIFT, n, exec, ${toggleScript}"
         ];
       };
-    };
-
-    systemd.user.services.hyprsunset-autostart = {
-      description = "Autodetect Hyprsunset mode at login";
-      wantedBy = [ "graphical-session.target" ];
-      serviceConfig = {
-        Type = "oneshot";
-        ExecStart = ''
-          time=$(date +%H%M)
-          if [ "$time" -ge 2200 ] || [ "$time" -lt 800 ]; then
-            ${pkgs.systemd}/bin/systemctl --user start hyprsunset-warm.service
-          else
-            ${pkgs.systemd}/bin/systemctl --user start hyprsunset-cold.service
-          fi
-        '';
-      };
-    };
-
-    systemd.user.services.hyprsunset-warm = {
-      description = "Hyprsunset warm mode";
-      serviceConfig = {
-        Type = "oneshot";
-        ExecStart = ''
-          ${pkgs.procps}/bin/pkill hyprsunset || true
-          ${pkgs.hyprsunset}/bin/hyprsunset -t 4500
-        '';
-      };
-    };
-
-    systemd.user.services.hyprsunset-cold = {
-      description = "Hyprsunset cold mode";
-      serviceConfig = {
-        Type = "oneshot";
-        ExecStart = ''
-          ${pkgs.procps}/bin/pkill hyprsunset || true
-          ${pkgs.hyprsunset}/bin/hyprsunset -i
-        '';
-      };
-    };
-    systemd.user.timers.hyprsunset-night = {
-      description = "Switch Hyprsunset to warm mode at night";
-      timerConfig = {
-        OnCalendar = "*-*-* 22:00:00";
-        Unit = "hyprsunset-warm.service";
-        Persistent = true;
-      };
-      wantedBy = [ "timers.target" ];
-    };
-
-    systemd.user.timers.hyprsunset-day = {
-      description = "Switch Hyprsunset to cold mode in the morning";
-      timerConfig = {
-        OnCalendar = "*-*-* 08:00:00";
-        Unit = "hyprsunset-cold.service";
-        Persistent = true;
-      };
-      wantedBy = [ "timers.target" ];
     };
   };
 }
