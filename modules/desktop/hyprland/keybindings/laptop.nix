@@ -10,7 +10,7 @@ let
 
   updateMicLed = pkgs.writeShellScript "update-mic-led" ''
     micStatus=$(wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | grep -c MUTED)
-    brightnessctl -d platform::micmute set "$micStatus"
+    brightnessctl -d platform::micmute set "$micStatus > /dev/null"
   '';
 
   toggleMic = pkgs.writeShellScript "toggle-mic" ''
