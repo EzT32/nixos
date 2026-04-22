@@ -17,5 +17,6 @@
     imagemagick
     inkscape
     aria2
+    alsa-utils
   ];
 }

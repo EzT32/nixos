@@ -6,6 +6,7 @@ _: {
     ./git.nix
     ./kitty.nix
     ./libreoffice.nix
+    ./localsend.nix
     ./mpv.nix
     ./obsidian.nix
     ./pinta.nix
