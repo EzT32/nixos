@@ -21,12 +21,14 @@ in
 
       package = pkgs.steam.override {
         extraEnv = {
-          MANGOHUD = false;
+          MANGOHUD = true;
           STEAM_FORCE_DESKTOPUI_SCALING = "1";
           STEAM_SCALE = "0.75";
         };
         extraPkgs = pkgs: [ pkgs.mangohud ];
       };
+
+      extraCompatPackages = with pkgs; [ proton-ge-bin ];
     };
   };
 }
