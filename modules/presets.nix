@@ -21,9 +21,12 @@ _: {
 
       hyprland = {
         enable = true;
-
-        hyprpaper.enable = true;
         hyprsunset.enable = true;
+
+        hyprpaper = {
+          enable = true;
+          wallpaper = "Scatter_gruvbox.png";
+        };
 
         keybinds = {
           launchers.enable = true;
@@ -47,6 +50,7 @@ _: {
       mpv.enable = true;
       spotify.enable = true;
       ssh.enable = true;
+      localsend.enable = true;
     };
 
     services = {

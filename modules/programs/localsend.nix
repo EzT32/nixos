@@ -14,8 +14,11 @@ in
 
   config = lib.mkIf cfg.enable {
     home-manager.users.ezt = {
-      home.packages = with pkgs; [
-        localsend
+      home.packages = [
+        (pkgs.writeShellScriptBin "localsend" ''
+          exec ${pkgs.localsend}/bin/localsend_app "$@"
+        '')
+        pkgs.localsend
       ];
     };
   };
