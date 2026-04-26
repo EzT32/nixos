@@ -11,13 +11,14 @@ _: {
     ./obsidian.nix
     ./pinta.nix
     ./prismlauncher.nix
+    ./rofi
+    ./shell
     ./spotify.nix
     ./ssh.nix
     ./steam.nix
     ./syncplay.nix
+    ./teamspeak.nix
     ./vlc.nix
     ./wlr-randr.nix
-    ./rofi
-    ./shell
   ];
 }

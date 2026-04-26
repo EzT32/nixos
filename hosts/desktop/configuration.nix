@@ -13,6 +13,7 @@ _: {
       pinta.enable = true;
       vscode.enable = true;
       obsidian.enable = true;
+      teamspeak.enable = true;
     };
   };
 }
