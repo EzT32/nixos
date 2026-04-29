@@ -26,6 +26,7 @@ let
         ipython
         plotly
         gymnasium
+        pygame
         datasets
         pkgs.openml
       ]
