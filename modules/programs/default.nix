@@ -5,6 +5,7 @@ _: {
     ./discord.nix
     ./git.nix
     ./kitty.nix
+    ./lact.nix
     ./libreoffice.nix
     ./localsend.nix
     ./mpv.nix
