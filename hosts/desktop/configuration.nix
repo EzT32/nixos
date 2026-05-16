@@ -8,7 +8,6 @@ _: {
     programs = {
       prismlauncher.enable = true;
       syncplay.enable = true;
-      libreoffice.enable = true;
       steam.enable = true;
       pinta.enable = true;
       vscode.enable = true;

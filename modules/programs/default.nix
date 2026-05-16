@@ -10,6 +10,7 @@ _: {
     ./localsend.nix
     ./mpv.nix
     ./obsidian.nix
+    ./onlyoffice.nix
     ./pinta.nix
     ./prismlauncher.nix
     ./rofi

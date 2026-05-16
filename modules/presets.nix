@@ -51,6 +51,7 @@ _: {
       spotify.enable = true;
       ssh.enable = true;
       localsend.enable = true;
+      onlyoffice.enable = true;
     };
 
     services = {
