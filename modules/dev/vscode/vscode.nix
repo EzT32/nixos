@@ -54,7 +54,7 @@ in
               "editor.defaultFormatter" = "charliermarsh.ruff";
             };
 
-            "python.defaultInterpreterPath" = "usr/bin/python";
+            "python.defaultInterpreterPath" = "/usr/bin/python";
 
             # Ricing
             "workbench.colorTheme" = "Gruvbox Dark Medium";

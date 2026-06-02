@@ -3,7 +3,6 @@ _: {
     enable = true;
     audio.enable = true;
     pulse.enable = true;
-
     alsa = {
       enable = true;
       support32Bit = true;
@@ -20,4 +19,17 @@ _: {
       ];
     };
   };
+
+  environment.etc."wireplumber/wireplumber.conf.d/firefox-volume.conf".text = ''
+    stream.rules = [
+      {
+        matches = [ { node.name = "Firefox" } ]
+        actions = {
+          modify-props = {
+            node.volume = 0.3
+          }
+        }
+      }
+    ]
+  '';
 }

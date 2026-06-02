@@ -13,6 +13,7 @@ _: {
       vscode.enable = true;
       obsidian.enable = true;
       teamspeak.enable = true;
+      lact.enable = true;
     };
   };
 }
