@@ -7,5 +7,6 @@ _: {
     ./networking.nix
     ./nix.nix
     ./security.nix
+    ./wooting.nix
   ];
 }
