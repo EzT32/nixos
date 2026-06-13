@@ -8,7 +8,7 @@ in
 
     path = lib.mkOption {
       type = lib.types.path;
-      default = "${config.home-manager.users.ezt.home.homeDirectory}/nix-repo/wallpapers";
+      default = "${config.home-manager.users.ezt.home.homeDirectory}/nixos/wallpapers";
       description = "Path to the directory containing wallpapers for hyprlock.";
       example = "~/path/to/wallpaper/folder";
     };
