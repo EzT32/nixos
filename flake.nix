@@ -23,7 +23,7 @@
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "x86_64-linux" ];
 
-      imports = [ (inputs.import-tree ./modules) ];
+      imports = [ (inputs.import-tree ./hosts) ];
 
       flake.formatter.x86_64-linux = inputs.nixpkgs.legacyPackages.x86_64-linux.nixfmt-tree;
     };
