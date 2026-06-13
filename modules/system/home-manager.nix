@@ -1,6 +1,12 @@
-{ config, lib, ... }:
+# modules/system/home-manager.nix
+{
+  config,
+  lib,
+  ...
+}:
 let
   cfg = config.modules.system.home-manager;
+  user = config.modules.system.user;
 in
 {
   options.modules.system.home-manager = {
@@ -8,11 +14,15 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home-manager.users.ezt = {
-      home = {
-        stateVersion = config.system.stateVersion;
-        username = "ezt";
-        homeDirectory = "/home/ezt";
+    home-manager = {
+      useGlobalPkgs = true;
+      useUserPackages = true;
+      users.${user.username} = {
+        home = {
+          stateVersion = config.system.stateVersion;
+          username = user.username;
+          homeDirectory = user.homeDir;
+        };
       };
     };
   };
