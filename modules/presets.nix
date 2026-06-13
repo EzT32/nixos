@@ -10,6 +10,8 @@ _: {
   system.stateVersion = "26.05";
 
   modules = {
+    username = "ezt";
+
     kitty.enable = true;
     nvim.enable = true;
     rofi.enable = true;

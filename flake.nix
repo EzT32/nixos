@@ -15,26 +15,16 @@
     {
       self,
       nixpkgs,
-      nixpkgs-unstable,
       home-manager,
       nixos-hardware,
       ...
     }:
     let
       system = "x86_64-linux";
-      pkgs = import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-      };
-
-      unstable = import nixpkgs-unstable {
-        inherit system;
-        config.allowUnfree = true;
-      };
     in
     {
       # Remember to update to 'nixfmt' after transition fase.
-      formatter.${system} = pkgs.nixfmt-tree;
+      formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt-tree;
 
       nixosConfigurations = {
         laptop = nixpkgs.lib.nixosSystem {
@@ -46,7 +36,7 @@
             home-manager.nixosModules.home-manager
             nixos-hardware.nixosModules.lenovo-thinkpad-e14-amd
           ];
-          specialArgs = { inherit system unstable self; };
+          specialArgs = { inherit system self; };
         };
 
         desktop = nixpkgs.lib.nixosSystem {
@@ -58,7 +48,7 @@
             home-manager.nixosModules.home-manager
           ];
 
-          specialArgs = { inherit system unstable self; };
+          specialArgs = { inherit system self; };
         };
       };
     };

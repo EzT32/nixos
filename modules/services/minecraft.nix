@@ -1,8 +1,7 @@
-{ unstable, ... }:
-{
+{ pkgs, ... }: {
   config.services.minecraft-server = {
     enable = true;
-    package = unstable.minecraft-server;
+    package = pkgs.unstable.minecraft-server;
     eula = true;
     openFirewall = true;
     declarative = true;
