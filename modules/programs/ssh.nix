@@ -19,7 +19,7 @@ in
         enable = true;
         enableDefaultConfig = false;
 
-        matchBlocks = {
+        settings = {
           "uio" = {
             host = "uio";
             hostname = "login.uio.no";

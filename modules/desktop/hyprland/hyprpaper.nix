@@ -28,15 +28,20 @@ in
 
   config = lib.mkIf cfg.enable {
     home-manager.users.ezt = {
-      wayland.windowManager.hyprland.settings = {
-        exec-once = [ "hyprpaper" ];
-      };
+      # wayland.windowManager.hyprland.settings = {
+      #   exec-once = [ "hyprpaper" ];
+      # };
 
       services.hyprpaper = {
         enable = true;
         settings = {
           preload = [ "${cfg.path}/${cfg.wallpaper}" ];
-          wallpaper = [ ",${cfg.path}/${cfg.wallpaper}" ];
+          wallpaper = [
+            {
+              monitor = ""; # empty string = all monitors / fallback
+              path = "${cfg.path}/${cfg.wallpaper}";
+            }
+          ];
         };
       };
     };

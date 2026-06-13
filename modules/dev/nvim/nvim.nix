@@ -48,15 +48,18 @@ in
 
         plugins = with pkgs.vimPlugins; [
           nvim-lspconfig
-          nvim-treesitter
-          nvim-treesitter-parsers.lua
-          nvim-treesitter-parsers.nix
-          nvim-treesitter-parsers.bash
-          nvim-treesitter-parsers.vhdl
-          nvim-treesitter-parsers.asm
-          nvim-treesitter-parsers.python
-          nvim-treesitter-parsers.c
-          nvim-treesitter-parsers.java
+          (nvim-treesitter.withPlugins (
+            p: with p; [
+              lua
+              nix
+              bash
+              vhdl
+              asm
+              python
+              c
+              java
+            ]
+          ))
 
           telescope-nvim
           plenary-nvim
@@ -81,7 +84,7 @@ in
       };
 
       home.packages = with pkgs; [
-        nixfmt-rfc-style
+        nixfmt
       ];
 
       xdg.configFile."nvim/init.lua".source = ./init.lua;
