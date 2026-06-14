@@ -12,7 +12,7 @@ let
 in
 {
   options.modules.programs.syncplay = {
-    enable = lib.mkEnableOption "Syncplay";
+    enable = lib.options.mkUnsetOption "Syncplay";
   };
 
   config =
