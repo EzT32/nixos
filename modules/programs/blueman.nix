@@ -12,7 +12,7 @@ in
 {
   options.modules.programs.blueman = {
     enable = lib.options.mkUnsetOption "Blueman";
-    startup = lib.options.mkUnsetOption "Launch blueman on startup";
+    startup = lib.mkEnableOption "Launch blueman on startup";
   };
 
   config =
