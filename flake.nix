@@ -25,6 +25,10 @@
 
       imports = [ (inputs.import-tree ./hosts) ];
 
-      flake.formatter.x86_64-linux = inputs.nixpkgs.legacyPackages.x86_64-linux.nixfmt-tree;
+      # Scopes pkgs to the current system, no architecture def needed.
+      perSystem = { pkgs, ... }: {
+        # TODO: switch to nixfmt once nixfmt-tree transition period ends.
+        formatter = pkgs.nixfmt-tree;
+      };
     };
 }
