@@ -12,7 +12,7 @@ let
 in
 {
   options.modules.programs.mpv = {
-    enable = lib.mkEnableOption "Mpv";
+    enable = lib.options.mkUnsetOption "Mpv";
   };
 
   config =
