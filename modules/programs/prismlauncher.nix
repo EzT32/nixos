@@ -1,3 +1,4 @@
+# modules/programs/prismlauncher.nix
 {
   config,
   lib,
@@ -6,17 +7,26 @@
 }:
 let
   cfg = config.modules.programs.prismlauncher;
+  enableGroups = config.modules.enableGroups;
+  user = config.modules.system.user;
 in
 {
   options.modules.programs.prismlauncher = {
-    enable = lib.mkEnableOption "Enable prismlauncher";
+    enable = lib.mkUnsetOption "Prismlauncher";
   };
 
-  config = lib.mkIf cfg.enable {
-    home-manager.users.ezt = {
-      home.packages = with pkgs; [
-        prismlauncher
-      ];
-    };
-  };
+  config =
+    lib.mkIf
+      (lib.modules.isEnabled cfg.enable [
+        "programs"
+        "gaming"
+      ] enableGroups)
+      {
+
+        home-manager.users.${user.username} = {
+          home.packages = with pkgs; [
+            prismlauncher
+          ];
+        };
+      };
 }

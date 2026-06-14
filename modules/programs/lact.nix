@@ -1,3 +1,4 @@
+# modules/programs/lact.nix
 {
   config,
   lib,
@@ -6,15 +7,21 @@
 }:
 let
   cfg = config.modules.programs.lact;
+  enableGroups = config.modules.enableGroups;
 in
 {
   options.modules.programs.lact = {
-    enable = lib.mkEnableOption "Enable lact";
+    enable = lib.mkUnsetOption "Lact";
   };
 
-  config = lib.mkIf cfg.enable {
-    environment.systemPackages = [ pkgs.lact ];
-    systemd.packages = [ pkgs.lact ]; # registers the lactd service unit
-    systemd.services.lactd.wantedBy = [ "multi-user.target" ]; # auto-starts it
-  };
+  config =
+    lib.mkIf
+      (lib.modules.isEnabled cfg.enable [
+        "amd"
+      ] enableGroups)
+      {
+        environment.systemPackages = [ pkgs.lact ];
+        systemd.packages = [ pkgs.lact ]; # registers the lactd service unit
+        systemd.services.lactd.wantedBy = [ "multi-user.target" ]; # auto-starts it
+      };
 }

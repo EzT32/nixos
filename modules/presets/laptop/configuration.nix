@@ -18,11 +18,5 @@ lib.mkIf (config.networking.hostName == "laptop") {
 
       cursor.size = 24;
     };
-
-    programs = {
-      obsidian.enable = true;
-      blueman.enable = true;
-      vscode.enable = true;
-    };
   };
 }

@@ -1,3 +1,4 @@
+# modules/programs/localsend.nix
 {
   config,
   lib,
@@ -6,20 +7,28 @@
 }:
 let
   cfg = config.modules.programs.localsend;
+  enableGroups = config.modules.enableGroups;
+  user = config.modules.system.user;
 in
 {
   options.modules.programs.localsend = {
-    enable = lib.mkEnableOption "Enable localsend";
+    enable = lib.mkUnsetOption "Localsend";
   };
 
-  config = lib.mkIf cfg.enable {
-    home-manager.users.ezt = {
-      home.packages = [
-        (pkgs.writeShellScriptBin "localsend" ''
-          exec ${pkgs.localsend}/bin/localsend_app "$@"
-        '')
-        pkgs.localsend
-      ];
-    };
-  };
+  config =
+    lib.mkIf
+      (lib.modules.isEnabled cfg.enable [
+        "programs"
+      ] enableGroups)
+      {
+
+        home-manager.users.${user.username} = {
+          home.packages = [
+            (pkgs.writeShellScriptBin "localsend" ''
+              exec ${pkgs.localsend}/bin/localsend_app "$@"
+            '')
+            pkgs.localsend
+          ];
+        };
+      };
 }

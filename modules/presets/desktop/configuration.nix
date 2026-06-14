@@ -16,13 +16,6 @@ lib.mkIf (config.networking.hostName == "desktop") {
     };
 
     programs = {
-      prismlauncher.enable = true;
-      syncplay.enable = true;
-      steam.enable = true;
-      pinta.enable = true;
-      vscode.enable = true;
-      obsidian.enable = true;
-      teamspeak.enable = true;
       lact.enable = true;
     };
   };

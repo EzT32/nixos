@@ -1,3 +1,4 @@
+# modules/dev/nvim/nvim.nix
 {
   config,
   lib,
@@ -5,15 +6,18 @@
   ...
 }:
 let
-  cfg = config.modules.nvim;
+  cfg = config.modules.dev.nvim;
+  enableGroups = config.modules.enableGroups;
+  user = config.modules.system.user;
 in
 {
-  options.modules.nvim = {
-    enable = lib.mkEnableOption "Enable modules nvim configuration.";
+  options.modules.dev.nvim = {
+    enable = lib.mkEnableOption "Neovim";
   };
 
-  config = lib.mkIf cfg.enable {
-    home-manager.users.ezt = {
+  config = lib.mkIf (lib.modules.isEnabled cfg.enable [ "dev" ] enableGroups) {
+
+    home-manager.users.${user.username} = {
       programs.neovim = {
         enable = true;
 

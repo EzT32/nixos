@@ -1,6 +1,7 @@
 # modules/presets/shared.nix
 _: {
   nixpkgs.config.allowUnfree = true;
+
   programs.firefox = {
     enable = true;
     preferences = {
@@ -11,61 +12,40 @@ _: {
   system.stateVersion = "26.05";
 
   modules = {
-    system.user.username = "ezt";
+    system = {
+      user.username = "ezt";
+      home-manager.enable = true;
+    };
 
-    kitty.enable = true;
-    nvim.enable = true;
-    rofi.enable = true;
-    system.home-manager.enable = true;
+    enableGroups = [
+      "cli"
+      "desktop"
+      "dev"
+      "fonts"
+      "programs"
+      "services"
+    ];
 
-    desktop = {
-      cursor.enable = true;
-      dolphin.enable = true;
+    desktop.hyprland = {
+      hyprlock.enable = false;
+      hypridle.enable = false;
 
-      hyprland = {
+      hyprland.keybinds.laptop = false;
+
+      hyprpaper = {
         enable = true;
-        hyprsunset.enable = true;
-
-        hyprpaper = {
-          enable = true;
-          wallpaper = "Scatter_gruvbox.png";
-        };
-
-        keybinds = {
-          launchers.enable = true;
-          media.enable = true;
-          mouse.enable = true;
-          window.enable = true;
-          workspace.enable = true;
-        };
+        wallpaper = "Scatter_gruvbox.png";
       };
     };
 
-    git = {
+    cli.git = {
       enable = true;
-
       userName = "EzT32";
       userEmail = "theodor.berghansen@icloud.com";
     };
 
     programs = {
-      discord.enable = true;
-      mpv.enable = true;
-      spotify.enable = true;
       ssh.enable = true;
-      localsend.enable = true;
-      onlyoffice.enable = true;
-    };
-
-    services = {
-      bluetooth.enable = true;
-    };
-
-    shell = {
-      bash.enable = true;
-      eza.enable = true;
-      zoxide.enable = true;
-      zsh.enable = true;
     };
   };
 }

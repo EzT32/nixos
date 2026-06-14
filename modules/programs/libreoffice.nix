@@ -1,3 +1,4 @@
+# modules/programs/libreoffice.nix
 {
   config,
   lib,
@@ -6,17 +7,26 @@
 }:
 let
   cfg = config.modules.programs.libreoffice;
+  enableGroups = config.modules.enableGroups;
+  user = config.modules.system.user;
 in
 {
   options.modules.programs.libreoffice = {
-    enable = lib.mkEnableOption "Enable libreoffice configurations.";
+    enable = lib.mkUnsetOption "Libreoffice";
   };
 
-  config = lib.mkIf cfg.enable {
-    home-manager.users.ezt = {
-      home.packages = with pkgs; [
-        libreoffice
-      ];
-    };
-  };
+  config =
+    lib.mkIf
+      (lib.modules.isEnabled cfg.enable [
+        "work"
+        "programs"
+      ] enableGroups)
+      {
+
+        home-manager.users.${user.username} = {
+          home.packages = with pkgs; [
+            libreoffice
+          ];
+        };
+      };
 }

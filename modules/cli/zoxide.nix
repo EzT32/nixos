@@ -1,31 +1,31 @@
-# modules/programs/pinta.nix
+# modules/cli/zoxide.nix
 {
-  lib,
   config,
-  pkgs,
+  lib,
   ...
 }:
 let
-  cfg = config.modules.programs.pinta;
+  cfg = config.modules.cli.zoxide;
   enableGroups = config.modules.enableGroups;
   user = config.modules.system.user;
 in
 {
-  options.modules.programs.pinta = {
-    enable = lib.mkEnableOption "Pinta";
+  options.modules.cli.zoxide = {
+    enable = lib.mkEnableOption "Zoxide";
   };
 
   config =
     lib.mkIf
       (lib.modules.isEnabled cfg.enable [
-        "programs"
+        "cli"
       ] enableGroups)
       {
 
         home-manager.users.${user.username} = {
-          home.packages = with pkgs; [
-            pinta
-          ];
+          programs.zoxide = {
+            enable = true;
+            options = [ "--cmd cd" ];
+          };
         };
       };
 }

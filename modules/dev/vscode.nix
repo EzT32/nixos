@@ -1,3 +1,4 @@
+# modules/dev/vscode.nix
 {
   config,
   lib,
@@ -5,7 +6,9 @@
   ...
 }:
 let
-  cfg = config.modules.programs.vscode;
+  cfg = config.modules.dev.vscode;
+  enableGroups = config.modules.enableGroups;
+  user = config.modules.system.user;
 
   pythonEnv = pkgs.vscode.fhsWithPackages (p: [
     (p.python3.withPackages (
@@ -32,15 +35,15 @@ let
       ]
     ))
   ]);
-
 in
 {
   options.modules.programs.vscode = {
-    enable = lib.mkEnableOption "Enable vscode";
+    enable = lib.mkUnsetOption "Visual Studio Code";
   };
 
-  config = lib.mkIf cfg.enable {
-    home-manager.users.ezt = {
+  config = lib.mkIf (lib.modules.isEnabled cfg.enable [ "dev" ] enableGroups) {
+
+    home-manager.users.${user.username} = {
       programs.vscode = {
         enable = true;
         package = pythonEnv;

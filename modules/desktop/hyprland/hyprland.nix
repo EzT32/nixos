@@ -1,10 +1,17 @@
-{ lib, config, ... }:
+# modules/desktop/hyprland/hyprland.nix
+{
+  config,
+  lib,
+  ...
+}:
 let
   cfg = config.modules.desktop.hyprland;
+  enableGroups = config.modules.enableGroups;
+  user = config.modules.system.user;
 in
 {
   options.modules.desktop.hyprland = {
-    enable = lib.mkEnableOption "Enable hyprland configurations.";
+    enable = lib.mkUnsetOption "Hyprland";
 
     sensitivity = lib.mkOption {
       type = lib.types.float;
@@ -14,15 +21,17 @@ in
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf (lib.modules.isEnabled cfg.enable [ "desktop" ] enableGroups) {
+
     programs.hyprland.enable = true;
     programs.hyprland.withUWSM = true;
 
-    home-manager.users.ezt = {
+    home-manager.users.${user.username} = {
       wayland.windowManager.hyprland = {
         enable = true;
         xwayland.enable = true;
         systemd.enable = false;
+
         configType = "hyprlang";
 
         settings = {
