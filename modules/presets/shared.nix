@@ -23,6 +23,8 @@ _: {
       "services"
     ];
 
+    services.bluetooth.enable = true;
+
     desktop.hyprland = {
       hyprlock.enable = false;
       hypridle.enable = false;
