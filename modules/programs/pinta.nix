@@ -12,7 +12,7 @@ let
 in
 {
   options.modules.programs.pinta = {
-    enable = lib.mkEnableOption "Pinta";
+    enable = lib.options.mkUnsetOption "Pinta";
   };
 
   config =
