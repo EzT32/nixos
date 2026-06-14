@@ -1,6 +1,7 @@
 # hosts/desktop/configuration.nix
 {
   inputs,
+  self,
   ...
 }:
 let
@@ -18,10 +19,11 @@ in
       ./_hardware-configuration.nix
       inputs.home-manager.nixosModules.home-manager # default module to declare home-manager options.
       (inputs.import-tree ../../modules) # custom modules collected by import-tree
+      (inputs.import-tree ../../overlays)
     ];
 
     # Extra values into every module file referenced by the configuration –
     # making them available as additional arguments like `{ config, lib, ...}`.
-    specialArgs = { inherit inputs; };
+    specialArgs = { inherit inputs self; };
   };
 }
