@@ -6,14 +6,14 @@
   ...
 }:
 let
-  cfg = config.modules.dev.kitty;
+  cfg = config.modules.programs.kitty;
   enableGroups = config.modules.enableGroups;
   user = config.modules.system.user;
 
   themePath = "${cfg.themeRepo}/themes/${cfg.theme}.conf";
 in
 {
-  options.modules.kitty = {
+  options.modules.programs.kitty = {
     enable = lib.options.mkUnsetOption "Custom module for kitty terminal";
 
     font = {
