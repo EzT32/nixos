@@ -12,10 +12,7 @@ _: {
   system.stateVersion = "26.05";
 
   modules = {
-    system = {
-      user.username = "ezt";
-      home-manager.enable = true;
-    };
+    system.user.username = "ezt";
 
     enableGroups = [
       "cli"
