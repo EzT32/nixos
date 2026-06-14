@@ -11,7 +11,7 @@ let
 in
 {
   options.modules.cli.eza = {
-    enable = lib.mkUnsetOption "Eza";
+    enable = lib.options.mkUnsetOption "Eza";
   };
 
   config =

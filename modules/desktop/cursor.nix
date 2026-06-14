@@ -12,7 +12,7 @@ let
 in
 {
   options.modules.desktop.cursor = {
-    enable = lib.mkUnsetOption "Custom module using pointerCursor";
+    enable = lib.options.mkUnsetOption "Custom module using pointerCursor";
 
     theme = lib.mkOption {
       type = lib.types.str;

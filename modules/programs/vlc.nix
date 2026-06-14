@@ -12,7 +12,7 @@ let
 in
 {
   options.modules.programs.vlc = {
-    enable = lib.mkUnsetOption "Vlc";
+    enable = lib.options.mkUnsetOption "Vlc";
   };
 
   config =

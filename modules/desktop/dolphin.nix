@@ -11,7 +11,7 @@ let
 in
 {
   options.modules.desktop.dolphin = {
-    enable = lib.mkUnsetOption "Dophin file explorer";
+    enable = lib.options.mkUnsetOption "Dophin file explorer";
   };
 
   config = lib.mkIf (lib.modules.isEnabled cfg.enable [ "desktop" ] enableGroups) {

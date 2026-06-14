@@ -12,7 +12,7 @@ let
 in
 {
   options.modules.programs.onlyoffice = {
-    enable = lib.mkUnsetOption "Onlyoffice";
+    enable = lib.options.mkUnsetOption "Onlyoffice";
   };
 
   config =

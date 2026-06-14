@@ -11,7 +11,7 @@ let
 in
 {
   options.modules.desktop.hyprland.hyprlock = {
-    enable = lib.mkUnsetOption "Custom module for hyprlock";
+    enable = lib.options.mkUnsetOption "Custom module for hyprlock";
 
     path = lib.mkOption {
       type = lib.types.path;

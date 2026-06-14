@@ -12,7 +12,7 @@ let
 in
 {
   options.modules.programs.spotify = {
-    enable = lib.mkUnsetOption "Spotify";
+    enable = lib.options.mkUnsetOption "Spotify";
   };
 
   config =

@@ -12,7 +12,7 @@ let
 in
 {
   options.modules.programs.localsend = {
-    enable = lib.mkUnsetOption "Localsend";
+    enable = lib.options.mkUnsetOption "Localsend";
   };
 
   config =

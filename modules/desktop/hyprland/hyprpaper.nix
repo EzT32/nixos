@@ -12,7 +12,7 @@ let
 in
 {
   options.modules.desktop.hyprland.hyprpaper = {
-    enable = lib.mkUnsetOption "Custom module for hyprpaper";
+    enable = lib.options.mkUnsetOption "Custom module for hyprpaper";
 
     path = lib.mkOption {
       type = lib.types.path;

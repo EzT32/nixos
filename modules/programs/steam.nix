@@ -11,7 +11,7 @@ let
 in
 {
   options.modules.programs.steam = {
-    enable = lib.mkUnsetOption "Steam";
+    enable = lib.options.mkUnsetOption "Steam";
   };
 
   config =

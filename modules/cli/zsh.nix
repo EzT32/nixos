@@ -11,7 +11,7 @@ let
 in
 {
   options.modules.cli.zsh = {
-    enable = lib.mkUnsetOption "Zsh";
+    enable = lib.options.mkUnsetOption "Zsh";
   };
 
   config =

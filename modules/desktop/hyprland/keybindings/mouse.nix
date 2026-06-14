@@ -11,7 +11,7 @@ let
 in
 {
   options.modules.desktop.hyprland.keybinds.mouse = {
-    enable = lib.mkUnsetOption "Mouse keybinds";
+    enable = lib.options.mkUnsetOption "Mouse keybinds";
   };
 
   config =

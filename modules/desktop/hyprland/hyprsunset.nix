@@ -26,7 +26,7 @@ let
 in
 {
   options.modules.desktop.hyprland.hyprsunset = {
-    enable = lib.mkUnsetOption "hyprsunset blue-light filter";
+    enable = lib.options.mkUnsetOption "hyprsunset blue-light filter";
 
     user = lib.mkOption {
       type = lib.types.str;

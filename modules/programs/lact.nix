@@ -11,7 +11,7 @@ let
 in
 {
   options.modules.programs.lact = {
-    enable = lib.mkUnsetOption "Lact";
+    enable = lib.options.mkUnsetOption "Lact";
   };
 
   config =

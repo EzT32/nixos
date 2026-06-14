@@ -11,7 +11,7 @@ let
 in
 {
   options.modules.desktop.hyprland.hypridle = {
-    enable = lib.mkUnsetOption "Custom module for hypridle";
+    enable = lib.options.mkUnsetOption "Custom module for hypridle";
 
     lockTimeout = lib.mkOption {
       type = lib.types.int;

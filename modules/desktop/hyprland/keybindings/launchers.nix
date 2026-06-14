@@ -11,7 +11,7 @@ let
 in
 {
   options.modules.desktop.hyprland.keybinds.launchers = {
-    enable = lib.mkUnsetOption "Launcher keybinds";
+    enable = lib.options.mkUnsetOption "Launcher keybinds";
   };
 
   config =

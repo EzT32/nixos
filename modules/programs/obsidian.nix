@@ -12,7 +12,7 @@ let
 in
 {
   options.modules.programs.obsidian = {
-    enable = lib.mkUnsetOption "Custom module for Obsidian";
+    enable = lib.options.mkUnsetOption "Custom module for Obsidian";
 
     vaultPath = lib.mkOption {
       type = lib.types.path;

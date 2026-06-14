@@ -14,7 +14,7 @@ let
 in
 {
   options.modules.kitty = {
-    enable = lib.mkUnsetOption "Custom module for kitty terminal";
+    enable = lib.options.mkUnsetOption "Custom module for kitty terminal";
 
     font = {
       name = lib.mkOption {

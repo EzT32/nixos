@@ -12,7 +12,7 @@ let
 in
 {
   options.modules.cli.git = {
-    enable = lib.mkUnsetOption "Custom module for git";
+    enable = lib.options.mkUnsetOption "Custom module for git";
 
     userName = lib.mkOption {
       type = lib.types.str;

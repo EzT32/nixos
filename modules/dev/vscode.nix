@@ -38,7 +38,7 @@ let
 in
 {
   options.modules.programs.vscode = {
-    enable = lib.mkUnsetOption "Visual Studio Code";
+    enable = lib.options.mkUnsetOption "Visual Studio Code";
   };
 
   config = lib.mkIf (lib.modules.isEnabled cfg.enable [ "dev" ] enableGroups) {

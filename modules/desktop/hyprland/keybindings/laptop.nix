@@ -23,7 +23,7 @@ let
 in
 {
   options.modules.desktop.hyprland.keybinds.laptop = {
-    enable = lib.mkUnsetOption "Laptop-specific keybinds";
+    enable = lib.options.mkUnsetOption "Laptop-specific keybinds";
 
     brightnessStep = lib.mkOption {
       type = lib.types.int;

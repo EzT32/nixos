@@ -12,7 +12,7 @@ let
 in
 {
   options.modules.programs.prismlauncher = {
-    enable = lib.mkUnsetOption "Prismlauncher";
+    enable = lib.options.mkUnsetOption "Prismlauncher";
   };
 
   config =

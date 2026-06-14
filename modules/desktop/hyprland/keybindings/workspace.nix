@@ -11,7 +11,7 @@ let
 in
 {
   options.modules.desktop.hyprland.keybinds.workspace = {
-    enable = lib.mkUnsetOption "Workspace keybinds";
+    enable = lib.options.mkUnsetOption "Workspace keybinds";
   };
 
   config =

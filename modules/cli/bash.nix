@@ -11,7 +11,7 @@ let
 in
 {
   options.modules.cli.bash = {
-    enable = lib.mkUnsetOption "Bash";
+    enable = lib.options.mkUnsetOption "Bash";
   };
 
   config =

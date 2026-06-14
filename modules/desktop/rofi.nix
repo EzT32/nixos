@@ -11,7 +11,7 @@ let
 in
 {
   options.modules.desktop.rofi = {
-    enable = lib.mkUnsetOption "Rofi";
+    enable = lib.options.mkUnsetOption "Rofi";
   };
 
   config =

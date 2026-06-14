@@ -11,7 +11,7 @@ let
 in
 {
   options.modules.desktop.hyprland.keybinds.window = {
-    enable = lib.mkUnsetOption "Window management keybinds";
+    enable = lib.options.mkUnsetOption "Window management keybinds";
   };
 
   config =

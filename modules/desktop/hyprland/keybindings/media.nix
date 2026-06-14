@@ -12,7 +12,7 @@ let
 in
 {
   options.modules.desktop.hyprland.keybinds.media = {
-    enable = lib.mkUnsetOption "Media keybinds";
+    enable = lib.options.mkUnsetOption "Media keybinds";
 
     volumeStep = lib.mkOption {
       type = lib.types.int;

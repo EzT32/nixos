@@ -12,7 +12,7 @@ let
 in
 {
   options.modules.programs.libreoffice = {
-    enable = lib.mkUnsetOption "Libreoffice";
+    enable = lib.options.mkUnsetOption "Libreoffice";
   };
 
   config =

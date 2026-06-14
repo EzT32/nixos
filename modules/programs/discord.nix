@@ -12,7 +12,7 @@ let
 in
 {
   options.modules.programs.discord = {
-    enable = lib.mkUnsetOption "Custom module for Discord";
+    enable = lib.options.mkUnsetOption "Custom module for Discord";
 
     openASAR = lib.mkOption {
       type = lib.types.bool;

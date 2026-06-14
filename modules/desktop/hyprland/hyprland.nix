@@ -11,7 +11,7 @@ let
 in
 {
   options.modules.desktop.hyprland = {
-    enable = lib.mkUnsetOption "Hyprland";
+    enable = lib.options.mkUnsetOption "Hyprland";
 
     sensitivity = lib.mkOption {
       type = lib.types.float;

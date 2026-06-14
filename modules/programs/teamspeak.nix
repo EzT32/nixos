@@ -12,7 +12,7 @@ let
 in
 {
   options.modules.programs.teamspeak = {
-    enable = lib.mkUnsetOption "Teamspeak";
+    enable = lib.options.mkUnsetOption "Teamspeak";
   };
 
   config =
