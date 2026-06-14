@@ -39,7 +39,7 @@ in
   config = lib.mkIf (lib.modules.isEnabled cfg.enable [ "desktop" ] enableGroups) {
 
     home-manager.users.${user.username} = {
-      pointerCursor = {
+      home.pointerCursor = {
         name = cfg.theme;
         size = cfg.size;
         package = cfg.package;

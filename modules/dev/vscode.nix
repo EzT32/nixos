@@ -37,7 +37,7 @@ let
   ]);
 in
 {
-  options.modules.programs.vscode = {
+  options.modules.dev.vscode = {
     enable = lib.options.mkUnsetOption "Visual Studio Code";
   };
 
