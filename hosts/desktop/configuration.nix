@@ -5,7 +5,7 @@
   ...
 }:
 let
-  lib = (import ../../lib/lib.nix) inputs.nixpkgs.lib;
+  lib = import "${self}/lib/lib.nix" inputs.nixpkgs.lib;
 in
 {
   # What nixos-rebuild looks at when doing `nixos-rebuild switch --flake .#desktop`.
@@ -16,10 +16,13 @@ in
     # List NixOS modules that should be merged together to form the final system configuration.
     modules = [
       { networking.hostName = "desktop"; } # what module preset-file to import based on hostName.
-      ./_hardware-configuration.nix
       inputs.home-manager.nixosModules.home-manager # default module to declare home-manager options.
-      (inputs.import-tree ../../modules) # custom modules collected by import-tree
-      (inputs.import-tree ../../overlays)
+
+      ./_hardware-configuration.nix # host-specific hardware file
+
+      # files to be collected by import-tree
+      (inputs.import-tree "${self}/modules")
+      (inputs.import-tree "${self}/overlays")
     ];
 
     # Extra values into every module file referenced by the configuration –
