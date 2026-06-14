@@ -1,12 +1,10 @@
-# modules/presets/desktop/configuration.nix
+# modules/presets/desktop.nix
 {
   config,
   lib,
   ...
 }:
 {
-  imports = [ ./hardware-configuration.nix ];
-
   # Import defined modules if hostName matches.
   config = lib.mkIf (config.networking.hostName == "desktop") {
     # Configuration of custom modules
