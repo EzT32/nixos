@@ -1,19 +1,33 @@
-_: {
-  networking.hostName = "laptop";
+# hosts/laptop/configuration.nix
+{
+  inputs,
+  self,
+  ...
+}:
+let
+  lib = import "${self}/lib/lib.nix" inputs.nixpkgs.lib;
+in
+{
+  # What nixos-rebuild looks at when doing `nixos-rebuild switch --flake .#desktop`.
+  # `nixosSystem` – defines the NixOS system configuration.
+  flake.nixosConfigurations.laptop = inputs.nixpkgs.lib.nixosSystem {
+    inherit lib;
 
-  modules = {
-    desktop = {
-      hyprland = {
-        keybinds.laptop.enable = true;
-      };
+    # List NixOS modules that should be merged together to form the final system configuration.
+    modules = [
+      { networking.hostName = "laptop"; } # what module preset-file to import based on hostName.
+      inputs.home-manager.nixosModules.home-manager # default module to declare home-manager options.
+      inputs.nixos-hardware.nixosModules.lenovo-thinkpad-e14-amd # laptop specific modules
 
-      cursor.size = 24;
-    };
+      ./_hardware-configuration.nix # host-specific hardware file
 
-    programs = {
-      obsidian.enable = true;
-      blueman.enable = true;
-      vscode.enable = true;
-    };
+      # files to be collected by import-tree
+      (inputs.import-tree "${self}/modules")
+      (inputs.import-tree "${self}/overlays")
+    ];
+
+    # Extra values into every module file referenced by the configuration –
+    # making them available as additional arguments like `{ config, lib, ...}`.
+    specialArgs = { inherit inputs self; };
   };
 }

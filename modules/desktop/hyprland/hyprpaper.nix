@@ -1,15 +1,18 @@
+# modules/desktop/hyprland/hyprpaper.nix
 {
-  lib,
   config,
+  lib,
   self,
   ...
 }:
 let
   cfg = config.modules.desktop.hyprland.hyprpaper;
+  enableGroups = config.modules.enableGroups;
+  user = config.modules.system.user;
 in
 {
   options.modules.desktop.hyprland.hyprpaper = {
-    enable = lib.mkEnableOption "Enable modules hyprpaper module.";
+    enable = lib.options.mkUnsetOption "Custom module for hyprpaper";
 
     path = lib.mkOption {
       type = lib.types.path;
@@ -20,32 +23,35 @@ in
 
     wallpaper = lib.mkOption {
       type = lib.types.str;
-      default = "NixGruvbox.png";
+      default = "Scatter_gruvbox.png";
       description = "Wallpaper file to use for hyprlock backbround.";
       example = "Wallpaper.png";
     };
   };
 
-  config = lib.mkIf cfg.enable {
-    home-manager.users.ezt = {
-      # wayland.windowManager.hyprland.settings = {
-      #   exec-once = [ "hyprpaper" ];
-      # };
+  config =
+    lib.mkIf
+      (lib.modules.isEnabled cfg.enable [
+        "hyprland"
+      ] enableGroups)
+      {
 
-      services.hyprpaper = {
-        enable = true;
-        settings = {
-          splash = false;
+        home-manager.users.${user.username} = {
+          services.hyprpaper = {
+            enable = true;
 
-          preload = [ "${cfg.path}/${cfg.wallpaper}" ];
-          wallpaper = [
-            {
-              monitor = ""; # empty string = all monitors / fallback
-              path = "${cfg.path}/${cfg.wallpaper}";
-            }
-          ];
+            settings = {
+              splash = false;
+
+              preload = [ "${cfg.path}/${cfg.wallpaper}" ];
+              wallpaper = [
+                {
+                  monitor = ""; # empty string = all monitors / fallback
+                  path = "${cfg.path}/${cfg.wallpaper}";
+                }
+              ];
+            };
+          };
         };
       };
-    };
-  };
 }

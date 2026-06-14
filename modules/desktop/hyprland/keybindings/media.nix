@@ -1,15 +1,18 @@
+# modules/desktop/hyprland/keybinds/media.nix
 {
-  lib,
   config,
+  lib,
   pkgs,
   ...
 }:
 let
   cfg = config.modules.desktop.hyprland.keybinds.media;
+  enableGroups = config.modules.enableGroups;
+  user = config.modules.system.user;
 in
 {
   options.modules.desktop.hyprland.keybinds.media = {
-    enable = lib.mkEnableOption "Media keybinds";
+    enable = lib.options.mkUnsetOption "Media keybinds";
 
     volumeStep = lib.mkOption {
       type = lib.types.int;
@@ -26,40 +29,47 @@ in
     };
   };
 
-  config = lib.mkIf cfg.enable {
-    home-manager.users.ezt = {
-      wayland.windowManager.hyprland.settings = {
-        bind = [
-          # Screenshots
-          ", PRINT, exec, grim ~/Pictures/screenshot-$(date +'%Y-%m-%d-%H%M%S').png"
-          "SHIFT, PRINT, exec, grim -g \"$(slurp)\" ~/Pictures/screenshot-$(date +'%Y-%m-%d-%H%M%S').png"
-          # Select a region, take a screenshot, and open in swappy for annotation
-          "SUPERSHIFT, S, exec, grim -g \"$(slurp)\" - | swappy -f -"
-        ];
+  config =
+    lib.mkIf
+      (lib.modules.isEnabled cfg.enable [
+        "hyprland-binds"
+      ] enableGroups)
+      {
 
-        bindl = [
-          ", XF86AudioPlay, exec, playerctl play-pause"
-          ", XF86AudioPrev, exec, playerctl previous"
-          ", XF86AudioNext, exec, playerctl next"
+        home-manager.users.${user.username} = {
+          wayland.windowManager.hyprland.settings = {
+            bind = [
+              # Screenshots
+              ", PRINT, exec, grim ~/Pictures/screenshot-$(date +'%Y-%m-%d-%H%M%S').png"
+              "SHIFT, PRINT, exec, grim -g \"$(slurp)\" ~/Pictures/screenshot-$(date +'%Y-%m-%d-%H%M%S').png"
+              # Select a region, take a screenshot, and open in swappy for annotation
+              "SUPERSHIFT, S, exec, grim -g \"$(slurp)\" - | swappy -f -"
+            ];
 
-          ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-        ];
+            bindl = [
+              ", XF86AudioPlay, exec, playerctl play-pause"
+              ", XF86AudioPrev, exec, playerctl previous"
+              ", XF86AudioNext, exec, playerctl next"
 
-        bindel = [
-          ", XF86AudioRaiseVolume, exec, wpctl set-volume -l ${toString cfg.maxVolume} @DEFAULT_AUDIO_SINK@ ${toString cfg.volumeStep}%+"
+              ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+            ];
 
-          ", XF86AudioLowerVolume, exec, wpctl set-volume -l ${toString cfg.maxVolume} @DEFAULT_AUDIO_SINK@ ${toString cfg.volumeStep}%-"
+            bindel = [
+              ", XF86AudioRaiseVolume, exec, wpctl set-volume -l ${toString cfg.maxVolume} @DEFAULT_AUDIO_SINK@ ${toString cfg.volumeStep}%+"
+
+              ", XF86AudioLowerVolume, exec, wpctl set-volume -l ${toString cfg.maxVolume} @DEFAULT_AUDIO_SINK@ ${toString cfg.volumeStep}%-"
+            ];
+          };
+
+          home.packages = with pkgs; [
+            grim
+            slurp
+            swappy
+          ];
+        };
+
+        environment.systemPackages = with pkgs; [
+          playerctl
         ];
       };
-
-      home.packages = with pkgs; [
-        grim
-        slurp
-        swappy
-      ];
-    };
-    environment.systemPackages = with pkgs; [
-      playerctl
-    ];
-  };
 }

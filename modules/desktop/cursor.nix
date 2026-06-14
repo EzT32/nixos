@@ -1,15 +1,18 @@
+# modules/desktop/cursor.nix
 {
-  pkgs,
   config,
   lib,
+  pkgs,
   ...
 }:
 let
   cfg = config.modules.desktop.cursor;
+  enableGroups = config.modules.enableGroups;
+  user = config.modules.system.user;
 in
 {
   options.modules.desktop.cursor = {
-    enable = lib.mkEnableOption "Enable modules pointer module.";
+    enable = lib.options.mkUnsetOption "Custom module using pointerCursor";
 
     theme = lib.mkOption {
       type = lib.types.str;
@@ -33,16 +36,22 @@ in
     };
   };
 
-  config = lib.mkIf cfg.enable {
-    home-manager.users.ezt.home = {
-      pointerCursor = {
-        name = cfg.theme;
-        size = cfg.size;
-        package = cfg.package;
-        hyprcursor.enable = true;
-        x11.enable = true;
-        gtk.enable = true;
+  config =
+    lib.mkIf
+      (lib.modules.isEnabled cfg.enable [
+        "desktop"
+      ] enableGroups)
+      {
+
+        home-manager.users.${user.username} = {
+          home.pointerCursor = {
+            name = cfg.theme;
+            size = cfg.size;
+            package = cfg.package;
+            hyprcursor.enable = true;
+            x11.enable = true;
+            gtk.enable = true;
+          };
+        };
       };
-    };
-  };
 }

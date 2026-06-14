@@ -1,3 +1,4 @@
+# modules/programs/pinta.nix
 {
   lib,
   config,
@@ -6,17 +7,25 @@
 }:
 let
   cfg = config.modules.programs.pinta;
+  enableGroups = config.modules.enableGroups;
+  user = config.modules.system.user;
 in
 {
   options.modules.programs.pinta = {
-    enable = lib.mkEnableOption "Enable pinta";
+    enable = lib.options.mkUnsetOption "Pinta";
   };
 
-  config = lib.mkIf cfg.enable {
-    home-manager.users.ezt = {
-      home.packages = with pkgs; [
-        pinta
-      ];
-    };
-  };
+  config =
+    lib.mkIf
+      (lib.modules.isEnabled cfg.enable [
+        "programs"
+      ] enableGroups)
+      {
+
+        home-manager.users.${user.username} = {
+          home.packages = with pkgs; [
+            pinta
+          ];
+        };
+      };
 }

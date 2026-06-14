@@ -1,3 +1,4 @@
+# modules/programs/vlc.nix
 {
   config,
   lib,
@@ -6,17 +7,26 @@
 }:
 let
   cfg = config.modules.programs.vlc;
+  enableGroups = config.modules.enableGroups;
+  user = config.modules.system.user;
 in
 {
   options.modules.programs.vlc = {
-    enable = lib.mkEnableOption "Enable vlc";
+    enable = lib.options.mkUnsetOption "Vlc";
   };
 
-  config = lib.mkIf cfg.enable {
-    home-manager.users.ezt = {
-      home.packages = with pkgs; [
-        vlc
-      ];
-    };
-  };
+  config =
+    lib.mkIf
+      (lib.modules.isEnabled cfg.enable [
+        "programs"
+        "media"
+      ] enableGroups)
+      {
+
+        home-manager.users.${user.username} = {
+          home.packages = with pkgs; [
+            vlc
+          ];
+        };
+      };
 }

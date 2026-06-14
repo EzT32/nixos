@@ -1,32 +1,31 @@
-# modules/programs/syncplay.nix
+# modules/cli/zoxide.nix
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 let
-  cfg = config.modules.programs.syncplay;
+  cfg = config.modules.cli.zoxide;
   enableGroups = config.modules.enableGroups;
   user = config.modules.system.user;
 in
 {
-  options.modules.programs.syncplay = {
-    enable = lib.options.mkUnsetOption "Syncplay";
+  options.modules.cli.zoxide = {
+    enable = lib.options.mkUnsetOption "Zoxide";
   };
 
   config =
     lib.mkIf
       (lib.modules.isEnabled cfg.enable [
-        "programs"
-        "media"
+        "cli"
       ] enableGroups)
       {
 
         home-manager.users.${user.username} = {
-          home.packages = with pkgs; [
-            syncplay
-          ];
+          programs.zoxide = {
+            enable = true;
+            options = [ "--cmd cd" ];
+          };
         };
       };
 }

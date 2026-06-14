@@ -1,12 +1,15 @@
+# modules/desktop/hyprland/keybinds/laptop.nix
 {
+  config,
   lib,
   pkgs,
-  config,
   ...
 }:
 
 let
   cfg = config.modules.desktop.hyprland.keybinds.laptop;
+  enableGroups = config.modules.enableGroups;
+  user = config.modules.system.user;
 
   updateMicLed = pkgs.writeShellScript "update-mic-led" ''
     micStatus=$(wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | grep -c MUTED)
@@ -20,7 +23,7 @@ let
 in
 {
   options.modules.desktop.hyprland.keybinds.laptop = {
-    enable = lib.mkEnableOption "Laptop-specific keybinds";
+    enable = lib.options.mkUnsetOption "Laptop-specific keybinds";
 
     brightnessStep = lib.mkOption {
       type = lib.types.int;
@@ -30,20 +33,28 @@ in
     };
   };
 
-  config = lib.mkIf cfg.enable {
-    home-manager.users.ezt = {
-      wayland.windowManager.hyprland.settings = {
-        bindl = [
-          ", XF86AudioMicMute, exec, ${toggleMic}"
-        ];
-        binde = [
-          ", XF86MonBrightnessDown, exec, brightnessctl set ${toString cfg.brightnessStep}%-"
-          ", XF86MonBrightnessUp, exec, brightnessctl set ${toString cfg.brightnessStep}%+"
+  config =
+    lib.mkIf
+      (lib.modules.isEnabled cfg.enable [
+        "hyprland-laptop-binds"
+      ] enableGroups)
+      {
+
+        home-manager.users.${user.username} = {
+          wayland.windowManager.hyprland.settings = {
+            bindl = [
+              ", XF86AudioMicMute, exec, ${toggleMic}"
+            ];
+
+            binde = [
+              ", XF86MonBrightnessDown, exec, brightnessctl set ${toString cfg.brightnessStep}%-"
+              ", XF86MonBrightnessUp, exec, brightnessctl set ${toString cfg.brightnessStep}%+"
+            ];
+          };
+        };
+
+        environment.systemPackages = with pkgs; [
+          brightnessctl
         ];
       };
-    };
-    environment.systemPackages = with pkgs; [
-      brightnessctl
-    ];
-  };
 }

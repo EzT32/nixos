@@ -1,3 +1,4 @@
+# modules/programs/mpv.nix
 {
   config,
   lib,
@@ -6,17 +7,25 @@
 }:
 let
   cfg = config.modules.programs.mpv;
+  enableGroups = config.modules.enableGroups;
+  user = config.modules.system.user;
 in
 {
   options.modules.programs.mpv = {
-    enable = lib.mkEnableOption "Enable mpv";
+    enable = lib.options.mkUnsetOption "Mpv";
   };
 
-  config = lib.mkIf cfg.enable {
-    home-manager.users.ezt = {
-      home.packages = with pkgs; [
-        mpv
-      ];
-    };
-  };
+  config =
+    lib.mkIf
+      (lib.modules.isEnabled cfg.enable [
+        "programs"
+        "media"
+      ] enableGroups)
+      {
+        home-manager.users.${user.username} = {
+          home.packages = with pkgs; [
+            mpv
+          ];
+        };
+      };
 }

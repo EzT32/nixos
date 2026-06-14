@@ -1,3 +1,4 @@
+# modules/programs/kitty.nix
 {
   config,
   lib,
@@ -5,13 +6,15 @@
   ...
 }:
 let
-  cfg = config.modules.kitty;
+  cfg = config.modules.programs.kitty;
+  enableGroups = config.modules.enableGroups;
+  user = config.modules.system.user;
 
   themePath = "${cfg.themeRepo}/themes/${cfg.theme}.conf";
 in
 {
-  options.modules.kitty = {
-    enable = lib.mkEnableOption "Enable Kitty terminal configuration";
+  options.modules.programs.kitty = {
+    enable = lib.options.mkUnsetOption "Custom module for kitty terminal";
 
     font = {
       name = lib.mkOption {
@@ -48,29 +51,37 @@ in
     };
   };
 
-  config = lib.mkIf cfg.enable {
-    home-manager.users.ezt = {
-      programs.kitty = {
-        enable = true;
+  config =
+    lib.mkIf
+      (lib.modules.isEnabled cfg.enable [
+        "cli"
+        "dev"
+        "programs"
+      ] enableGroups)
+      {
 
-        font = {
-          name = cfg.font.name;
-          size = cfg.font.size;
-        };
+        home-manager.users.${user.username} = {
+          programs.kitty = {
+            enable = true;
 
-        extraConfig = builtins.readFile themePath;
+            font = {
+              name = cfg.font.name;
+              size = cfg.font.size;
+            };
 
-        settings = {
-          window_padding_width = 0;
-          enable_audio_bell = false;
-          linux_display_server = "wayland";
-          background_opacity = "0.8";
+            extraConfig = builtins.readFile themePath;
+
+            settings = {
+              window_padding_width = 0;
+              enable_audio_bell = false;
+              linux_display_server = "wayland";
+              background_opacity = "0.8";
+            };
+          };
+
+          home.packages = with pkgs; [
+            nerd-fonts.fira-code
+          ];
         };
       };
-
-      home.packages = with pkgs; [
-        nerd-fonts.fira-code
-      ];
-    };
-  };
 }

@@ -1,3 +1,4 @@
+# modules/desktop/hyprland/hyprsunset.nix
 {
   config,
   lib,
@@ -6,6 +7,8 @@
 }:
 let
   cfg = config.modules.desktop.hyprland.hyprsunset;
+  enableGroups = config.modules.enableGroups;
+  user = config.modules.system.user;
 
   hyprctl-bin = "${pkgs.hyprland}/bin/hyprctl";
 
@@ -23,7 +26,7 @@ let
 in
 {
   options.modules.desktop.hyprland.hyprsunset = {
-    enable = lib.mkEnableOption "hyprsunset blue-light filter";
+    enable = lib.options.mkUnsetOption "hyprsunset blue-light filter";
 
     user = lib.mkOption {
       type = lib.types.str;
@@ -38,15 +41,21 @@ in
     };
   };
 
-  config = lib.mkIf cfg.enable {
-    home-manager.users.${cfg.user} = {
-      services.hyprsunset.enable = true;
+  config =
+    lib.mkIf
+      (lib.modules.isEnabled cfg.enable [
+        "hyprland"
+      ] enableGroups)
+      {
 
-      wayland.windowManager.hyprland.settings = {
-        bindl = [
-          "SUPERSHIFT, n, exec, ${toggleScript}"
-        ];
+        home-manager.users.${user.username} = {
+          services.hyprsunset.enable = true;
+
+          wayland.windowManager.hyprland.settings = {
+            bindl = [
+              "SUPERSHIFT, n, exec, ${toggleScript}"
+            ];
+          };
+        };
       };
-    };
-  };
 }
