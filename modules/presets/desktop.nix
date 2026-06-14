@@ -10,12 +10,18 @@
     # Configuration of custom modules
     modules = {
       desktop = {
-        hyprland.sensitivity = -0.5;
+        hyprland = {
+          hypridle.enable = false;
+          hyprlock.enable = false;
+
+          sensitivity = -0.5;
+        };
       };
 
-      programs = {
-        lact.enable = true;
-      };
+      enableGroups = [
+        "amd"
+        "gaming"
+      ];
     };
   };
 }

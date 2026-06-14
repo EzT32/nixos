@@ -1,14 +1,6 @@
 # modules/presets/shared.nix
 _: {
   nixpkgs.config.allowUnfree = true;
-
-  programs.firefox = {
-    enable = true;
-    preferences = {
-      "media.default_volume" = "0.5";
-    };
-  };
-
   system.stateVersion = "26.05";
 
   modules = {
@@ -17,25 +9,16 @@ _: {
     enableGroups = [
       "cli"
       "desktop"
+      "hyprland"
+      "hyprland-binds"
       "dev"
       "fonts"
-      "programs"
       "services"
+      "media"
+      "communication"
     ];
 
     services.bluetooth.enable = true;
-
-    desktop.hyprland = {
-      hyprlock.enable = false;
-      hypridle.enable = false;
-
-      keybinds.laptop.enable = false;
-
-      hyprpaper = {
-        enable = true;
-        wallpaper = "Scatter_gruvbox.png";
-      };
-    };
 
     cli.git = {
       enable = true;

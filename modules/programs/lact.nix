@@ -17,6 +17,7 @@ in
   config =
     lib.mkIf
       (lib.modules.isEnabled cfg.enable [
+        "programs"
         "amd"
       ] enableGroups)
       {

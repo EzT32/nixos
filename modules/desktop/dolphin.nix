@@ -14,11 +14,16 @@ in
     enable = lib.options.mkUnsetOption "Dophin file explorer";
   };
 
-  config = lib.mkIf (lib.modules.isEnabled cfg.enable [ "desktop" ] enableGroups) {
+  config =
+    lib.mkIf
+      (lib.modules.isEnabled cfg.enable [
+        "desktop"
+      ] enableGroups)
+      {
 
-    environment.systemPackages = with pkgs; [
-      kdePackages.dolphin
-      kdePackages.qtsvg
-    ];
-  };
+        environment.systemPackages = with pkgs; [
+          kdePackages.dolphin
+          kdePackages.qtsvg
+        ];
+      };
 }

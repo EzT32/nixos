@@ -10,12 +10,14 @@
     # Configuration of custom modules
     modules = {
       desktop = {
-        hyprland = {
-          keybinds.laptop.enable = true;
-        };
-
         cursor.size = 24;
       };
+
+      enableGroups = [
+        "hyprland-binds"
+        "work"
+        "bluetooth"
+      ];
     };
   };
 }

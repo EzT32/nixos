@@ -21,44 +21,49 @@ in
     };
   };
 
-  config = lib.mkIf (lib.modules.isEnabled cfg.enable [ "desktop" ] enableGroups) {
+  config =
+    lib.mkIf
+      (lib.modules.isEnabled cfg.enable [
+        "hyprland"
+      ] enableGroups)
+      {
 
-    programs.hyprland.enable = true;
-    programs.hyprland.withUWSM = true;
+        programs.hyprland.enable = true;
+        programs.hyprland.withUWSM = true;
 
-    home-manager.users.${user.username} = {
-      wayland.windowManager.hyprland = {
-        enable = true;
-        xwayland.enable = true;
-        systemd.enable = false;
+        home-manager.users.${user.username} = {
+          wayland.windowManager.hyprland = {
+            enable = true;
+            xwayland.enable = true;
+            systemd.enable = false;
 
-        configType = "hyprlang";
+            configType = "hyprlang";
 
-        settings = {
-          xwayland.force_zero_scaling = true;
+            settings = {
+              xwayland.force_zero_scaling = true;
 
-          general = {
-            gaps_in = 2;
-            gaps_out = 4;
-          };
+              general = {
+                gaps_in = 2;
+                gaps_out = 4;
+              };
 
-          input = {
-            kb_layout = "no";
+              input = {
+                kb_layout = "no";
 
-            sensitivity = cfg.sensitivity;
+                sensitivity = cfg.sensitivity;
 
-            touchpad = {
-              natural_scroll = true;
-              disable_while_typing = false;
+                touchpad = {
+                  natural_scroll = true;
+                  disable_while_typing = false;
+                };
+              };
+
+              monitor = [
+                "desc:Acer Technologies KG271 TF5EE0098522, 1920x1080@143.98Hz, 0x0, auto"
+                "desc:BNQ BenQ GL2450 K2E02672019, preferred, auto-right, auto"
+              ];
             };
           };
-
-          monitor = [
-            "desc:Acer Technologies KG271 TF5EE0098522, 1920x1080@143.98Hz, 0x0, auto"
-            "desc:BNQ BenQ GL2450 K2E02672019, preferred, auto-right, auto"
-          ];
         };
       };
-    };
-  };
 }

@@ -36,17 +36,22 @@ in
     };
   };
 
-  config = lib.mkIf (lib.modules.isEnabled cfg.enable [ "desktop" ] enableGroups) {
+  config =
+    lib.mkIf
+      (lib.modules.isEnabled cfg.enable [
+        "desktop"
+      ] enableGroups)
+      {
 
-    home-manager.users.${user.username} = {
-      home.pointerCursor = {
-        name = cfg.theme;
-        size = cfg.size;
-        package = cfg.package;
-        hyprcursor.enable = true;
-        x11.enable = true;
-        gtk.enable = true;
+        home-manager.users.${user.username} = {
+          home.pointerCursor = {
+            name = cfg.theme;
+            size = cfg.size;
+            package = cfg.package;
+            hyprcursor.enable = true;
+            x11.enable = true;
+            gtk.enable = true;
+          };
+        };
       };
-    };
-  };
 }

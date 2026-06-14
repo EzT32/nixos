@@ -23,7 +23,7 @@ in
 
     wallpaper = lib.mkOption {
       type = lib.types.str;
-      default = "NixGruvbox.png";
+      default = "Scatter_gruvbox.png";
       description = "Wallpaper file to use for hyprlock backbround.";
       example = "Wallpaper.png";
     };
@@ -32,7 +32,6 @@ in
   config =
     lib.mkIf
       (lib.modules.isEnabled cfg.enable [
-        "desktop"
         "hyprland"
       ] enableGroups)
       {

@@ -29,7 +29,6 @@ in
   config =
     lib.mkIf
       (lib.modules.isEnabled cfg.enable [
-        "desktop"
         "hyprland"
       ] enableGroups)
       {
