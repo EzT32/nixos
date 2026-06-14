@@ -3,10 +3,14 @@
   inputs,
   ...
 }:
+let
+  lib = (import ../lib/lib.nix) inputs.nixpkgs.lib;
+in
 {
   # What nixos-rebuild looks at when doing `nixos-rebuild switch --flake .#desktop`.
   # `nixosSystem` – defines the NixOS system configuration.
   flake.nixosConfigurations.desktop = inputs.nixpkgs.lib.nixosSystem {
+    inherit lib;
 
     # List NixOS modules that should be merged together to form the final system configuration.
     modules = [
