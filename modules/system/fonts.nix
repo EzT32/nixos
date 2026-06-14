@@ -6,13 +6,12 @@
   ...
 }:
 let
-  cfg = config.modules.system.fonts;
   enableGroups = config.modules.enableGroups;
 in
 {
   config =
     lib.mkIf
-      (lib.modules.inGroups cfg.enable [
+      (lib.modules.inGroups [
         "fonts"
       ] enableGroups)
       {
