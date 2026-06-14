@@ -11,7 +11,7 @@ let
 in
 {
   options.modules.programs.blueman = {
-    enable = lib.mkUnsetOption "Blueman";
+    enable = lib.options.mkUnsetOption "Blueman";
     startup = lib.mkEnableOption "Launch blueman on startup";
   };
 
