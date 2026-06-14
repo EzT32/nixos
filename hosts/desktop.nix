@@ -10,7 +10,7 @@
 
     # List NixOS modules that should be merged together to form the final system configuration.
     modules = [
-      { networking.hostName = "desktop"; } # set what module preset-file to import with import-tree
+      { networking.hostName = "desktop"; } # what module preset-file to import based on hostName.
       inputs.home-manager.nixosModules.home-manager # default module to declare home-manager options.
       (inputs.import-tree ../modules) # custom modules collected by import-tree
     ];

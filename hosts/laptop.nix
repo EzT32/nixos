@@ -6,11 +6,11 @@
 {
   # What nixos-rebuild looks at when doing `nixos-rebuild switch --flake .#desktop`.
   # `nixosSystem` – defines the NixOS system configuration.
-  flake.nixosConfigurations.desktop = inputs.nixpkgs.lib.nixosSystem {
+  flake.nixosConfigurations.laptop = inputs.nixpkgs.lib.nixosSystem {
 
     # List NixOS modules that should be merged together to form the final system configuration.
     modules = [
-      { networking.hostName = "laptop"; } # set what module preset-file to import with import-tree
+      { networking.hostName = "laptop"; } # what module preset-file to import based on hostName.
       inputs.home-manager.nixosModules.home-manager # default module to declare home-manager options.
       inputs.nixos-hardware.nixosModules.lenovo-thinkpad-e14-amd # laptop specific modules
       (inputs.import-tree ../modules) # custom modules collected by import-tree
