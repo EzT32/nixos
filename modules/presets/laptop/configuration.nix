@@ -4,19 +4,20 @@
   lib,
   ...
 }:
-# Import defined modules if hostName matches.
-lib.mkIf (config.networking.hostName == "laptop") {
+{
+  imports = [ ./hardware-configuration.nix ];
 
-  import = [ ./hardware-configuration.nix ];
+  # Import defined modules if hostName matches.
+  config = lib.mkIf (config.networking.hostName == "laptop") {
+    # Configuration of custom modules
+    modules = {
+      desktop = {
+        hyprland = {
+          keybinds.laptop.enable = true;
+        };
 
-  # Configuration of custom modules
-  modules = {
-    desktop = {
-      hyprland = {
-        keybinds.laptop.enable = true;
+        cursor.size = 24;
       };
-
-      cursor.size = 24;
     };
   };
 }

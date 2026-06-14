@@ -1,7 +1,7 @@
 # lib/lib.nix
 lib:
 lib.extend (
-  _: lprev: {
+  lfinal: lprev: {
     # Merge feature additions into attrset.
     # `or { }` guard against lib.modules not existing.
     modules = lprev.modules or { } // {
@@ -25,7 +25,7 @@ lib.extend (
       # Returns: boolean
       isEnabled =
         enable: groups: enableGroups:
-        enable == true || (enable == null && lprev.modules.inGroups groups enableGroups);
+        enable == true || (enable == null && lfinal.modules.inGroups groups enableGroups);
     };
 
     options = lprev.options or { } // {

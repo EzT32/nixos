@@ -30,7 +30,7 @@ _: {
       hyprlock.enable = false;
       hypridle.enable = false;
 
-      hyprland.keybinds.laptop = false;
+      keybinds.laptop.enable = false;
 
       hyprpaper = {
         enable = true;
@@ -42,10 +42,6 @@ _: {
       enable = true;
       userName = "EzT32";
       userEmail = "theodor.berghansen@icloud.com";
-    };
-
-    programs = {
-      ssh.enable = true;
     };
   };
 }
