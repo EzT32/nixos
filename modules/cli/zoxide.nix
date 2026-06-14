@@ -11,7 +11,7 @@ let
 in
 {
   options.modules.cli.zoxide = {
-    enable = lib.mkEnableOption "Zoxide";
+    enable = lib.options.mkUnsetOption "Zoxide";
   };
 
   config =

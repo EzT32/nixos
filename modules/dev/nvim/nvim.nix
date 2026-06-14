@@ -12,7 +12,7 @@ let
 in
 {
   options.modules.dev.nvim = {
-    enable = lib.mkEnableOption "Neovim";
+    enable = lib.options.mkUnsetOption "Neovim";
   };
 
   config = lib.mkIf (lib.modules.isEnabled cfg.enable [ "dev" ] enableGroups) {
