@@ -15,8 +15,8 @@ in
 
   config = lib.mkIf cfg.enable {
     home-manager = {
-      useGlobalPkgs = true;
-      useUserPackages = true;
+      useGlobalPkgs = true; # use system config's package set (nixpkgs)
+      useUserPackages = true; # allow user-specific packages through NixOS user configuration
       users.${user.username} = {
         home = {
           stateVersion = config.system.stateVersion;
