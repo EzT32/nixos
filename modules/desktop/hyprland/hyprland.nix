@@ -49,13 +49,18 @@ in
 
               input = {
                 kb_layout = "no";
-
                 sensitivity = cfg.sensitivity;
 
                 touchpad = {
                   natural_scroll = true;
                   disable_while_typing = false;
                 };
+
+                follow_mouse = 2;
+              };
+
+              misc = {
+                mouse_move_focuses_monitor = false;
               };
 
               monitor = [

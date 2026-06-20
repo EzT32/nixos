@@ -21,7 +21,6 @@ in
         "gaming"
       ] enableGroups)
       {
-
         programs.steam = {
           enable = true;
           remotePlay.openFirewall = true;
@@ -30,8 +29,7 @@ in
 
           package = pkgs.steam.override {
             extraEnv = {
-              MANGOHUD = true;
-              STEAM_FORCE_DESKTOPUI_SCALING = "1";
+              MANGOHUD = "1";
               STEAM_SCALE = "0.75";
             };
             extraPkgs = pkgs: [ pkgs.mangohud ];
@@ -39,5 +37,5 @@ in
 
           extraCompatPackages = with pkgs; [ proton-ge-bin ];
         };
-      };
+     };
 }
