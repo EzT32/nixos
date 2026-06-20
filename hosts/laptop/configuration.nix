@@ -1,33 +1,43 @@
 # hosts/laptop/configuration.nix
 {
+  config,
   inputs,
-  self,
   ...
 }:
 let
-  lib = import "${self}/lib/lib.nix" inputs.nixpkgs.lib;
+  username = "ezt";
 in
 {
   # What nixos-rebuild looks at when doing `nixos-rebuild switch --flake .#desktop`.
   # `nixosSystem` – defines the NixOS system configuration.
-  flake.nixosConfigurations.laptop = inputs.nixpkgs.lib.nixosSystem {
-    inherit lib;
-
-    # List NixOS modules that should be merged together to form the final system configuration.
+  flake.nixosConfigurations.desktop = inputs.nixpkgs.lib.nixosSystem {
     modules = [
-      { networking.hostName = "laptop"; } # what module preset-file to import based on hostName.
-      inputs.home-manager.nixosModules.home-manager # default module to declare home-manager options.
-      inputs.nixos-hardware.nixosModules.lenovo-thinkpad-e14-amd # laptop specific modules
+      { networking.hostName = "laptop"; }
 
-      ./_hardware-configuration.nix # host-specific hardware file
+      # Default module to declare home-manager options.
+      inputs.home-manager.nixosModules.home-manager
 
-      # files to be collected by import-tree
-      (inputs.import-tree "${self}/modules")
-      (inputs.import-tree "${self}/overlays")
+      # Host-specific hardware file
+      ./_hardware-configuration.nix
+
+      # NixOS class aspects this host wants.
+      # Include aspects from the shared tree/namespace.
+      # Anything not listed will not be part of the host.
+      {
+        home-manager.users.${username} = {
+          imports = with config.flake.modules.homeManager; [
+            # TODO: add aspects here once refactor is complete.
+            firefox
+          ];
+        };
+
+        home.stateVersion = "26.05";
+      }
+
     ];
 
     # Extra values into every module file referenced by the configuration –
     # making them available as additional arguments like `{ config, lib, ...}`.
-    specialArgs = { inherit inputs self; };
+    specialArgs = { inherit inputs; };
   };
 }
