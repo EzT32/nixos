@@ -1,28 +1,22 @@
 # hosts/desktop/configuration.nix
 {
-  inputs,
+  den,
   ...
 }:
 {
-  # What nixos-rebuild looks at when doing `nixos-rebuild switch --flake .#desktop`.
-  # `nixosSystem` – defines the NixOS system configuration.
-  flake.nixosConfigurations.desktop = inputs.nixpkgs.lib.nixosSystem {
-    modules = [
-      { networking.hostName = "desktop"; }
+  den.aspects.desktop = {
+    nixos = { ... }: {
+      networking.hostName = "desktop";
+      imports = [ ./_hardware-configuration.nix ];
+    };
 
-      # Default module to declare home-manager options.
-      inputs.home-manager.nixosModules.home-manager
+    homeManager = { ... }: {
+      discord.vencord = false;
+    };
 
-      # Host-specific hardware file.
-      ./_hardware-configuration.nix
-
-      # Module classes
-      ./_classes/nixos.nix
-      ./_classes/home-manager.nix
+    # List aspects to include
+    includes = [
+      den.aspects.discord
     ];
-
-    # Extra values into every module file referenced by the configuration –
-    # making them available as additional arguments like `{ config, lib, ...}`.
-    specialArgs = { inherit inputs; };
   };
 }
