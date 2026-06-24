@@ -1,32 +1,27 @@
 # modules/cli/core-cli.nix
 {
   den.aspects.core-cli = {
-    nixos =
-      {
-        pkgs,
-        ...
-      }:
-      {
-        environment.systemPackages = with pkgs; [
-          curl
-          evtest
-          htop
-          jq
-          libinput
-          lsof
-          parted
-          pwvucontrol
-          strace
-          unzip
-          vim
-          wget
-          zip
-          imagemagick
-          inkscape
-          aria2
-          alsa-utils
-          wlr-randr
-        ];
-      };
+    nixos = { pkgs, ... }: {
+      environment.systemPackages = with pkgs; [
+        curl
+        evtest
+        htop
+        jq
+        libinput
+        lsof
+        parted
+        pwvucontrol
+        strace
+        unzip
+        vim
+        wget
+        zip
+        imagemagick
+        inkscape
+        aria2
+        alsa-utils
+        wlr-randr
+      ];
+    };
   };
 }

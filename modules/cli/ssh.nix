@@ -2,10 +2,7 @@
 {
   den.aspects.ssh = {
     homeManager =
-      {
-        config,
-        ...
-      }:
+      { config, ... }:
       let
         homeDir = config.home.homeDir;
       in
@@ -53,16 +50,11 @@
         };
       };
 
-    nixos =
-      {
-        pkgs,
-        ...
-      }:
-      {
-        environment.systemPackages = [
-          pkgs.xauth
-          pkgs.sshfs
-        ];
-      };
+    nixos = { pkgs, ... }: {
+      environment.systemPackages = [
+        pkgs.xauth
+        pkgs.sshfs
+      ];
+    };
   };
 }
