@@ -1,23 +1,12 @@
 # modules/cli/core-cli.nix
 {
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-let
-  enableGroups = config.modules.enableGroups;
-in
-{
-  config =
-    lib.mkIf
-      (lib.modules.inGroups [
-        "programs"
-        "dev"
-        "cli"
-      ] enableGroups)
+  den.aspects.core-cli = {
+    nixos =
       {
-
+        pkgs,
+        ...
+      }:
+      {
         environment.systemPackages = with pkgs; [
           curl
           evtest
@@ -39,4 +28,5 @@ in
           wlr-randr
         ];
       };
+  };
 }
