@@ -1,9 +1,0 @@
-[Theme]
-Name=Gruvbox
-Description=Minimal Gruvbox SDDM Theme
-Type=sddm-theme
-Author=EzT32
-Version=1.0
-MainScript=Main.qml
-ConfigFile=theme.conf
-Theme-Id=gruvbox
