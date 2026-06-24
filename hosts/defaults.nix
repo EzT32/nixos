@@ -55,6 +55,10 @@
       kitty
       localsend
       misc
+      cursor
+      dolphin
+      rofi
+      xdg
     ];
   };
 }

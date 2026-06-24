@@ -1,4 +1,5 @@
 # modules/gui/hyprland/hyprpaper.nix
+{ self, ... }:
 {
   den.aspects.hyprpaper = {
     homeManager =
@@ -6,7 +7,6 @@
         config,
         lib,
         pkgs,
-        self,
         ...
       }:
       let
@@ -29,19 +29,21 @@
           };
         };
 
-        services.hyprpaper = {
-          enable = true;
+        config = {
+          services.hyprpaper = {
+            enable = true;
 
-          settings = {
-            splash = false;
+            settings = {
+              splash = false;
 
-            preload = [ "${cfg.path}/${cfg.wallpaper}" ];
-            wallpaper = [
-              {
-                monitor = ""; # empty string = all monitors / fallback
-                path = "${cfg.path}/${cfg.wallpaper}";
-              }
-            ];
+              preload = [ "${cfg.path}/${cfg.wallpaper}" ];
+              wallpaper = [
+                {
+                  monitor = ""; # empty string = all monitors / fallback
+                  path = "${cfg.path}/${cfg.wallpaper}";
+                }
+              ];
+            };
           };
         };
       };

@@ -8,6 +8,9 @@
       den.aspects.hyprland-mouse-binds
       den.aspects.hyprland-window-binds
       den.aspects.hyprland-workspace-binds
+
+      den.aspects.hyprpaper
+      den.aspects.hyprsunset
     ];
 
     homeManager =

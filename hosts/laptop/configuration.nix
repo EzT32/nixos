@@ -4,12 +4,15 @@
   den.aspects.laptop = {
     nixos = { ... }: {
       networking.hostName = "laptop";
-      imports = [ ./_hardware-configuration.nix ];
+      imports = [
+        ./_hardware-configuration.nix
+      ];
     };
 
     includes = with den.aspects; [
       hyprland-laptop-binds
       blueman
+      obsidian
     ];
   };
 }
