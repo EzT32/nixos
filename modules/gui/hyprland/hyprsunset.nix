@@ -30,11 +30,13 @@
           description = "Colour temperature (Kelvin) applied when the warm filter is active.";
         };
 
-        services.hyprsunset.enable = true;
+        config = {
+          services.hyprsunset.enable = true;
 
-        wayland.windowManager.hyprland.settings.bindl = [
-          "SUPERSHIFT, n, exec, ${toggleScript}"
-        ];
+          wayland.windowManager.hyprland.settings.bindl = [
+            "SUPERSHIFT, n, exec, ${toggleScript}"
+          ];
+        };
       };
   };
 }

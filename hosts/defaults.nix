@@ -59,6 +59,7 @@
       dolphin
       rofi
       xdg
+      waybar
     ];
   };
 }

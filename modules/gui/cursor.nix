@@ -32,13 +32,15 @@
           };
         };
 
-        home.pointerCursor = {
-          name = config.cursor.theme;
-          size = config.cursor.size;
-          package = config.cursor.package;
-          hyprcursor.enable = true;
-          x11.enable = true;
-          gtk.enable = true;
+        config = {
+          home.pointerCursor = {
+            name = config.cursor.theme;
+            size = config.cursor.size;
+            package = config.cursor.package;
+            hyprcursor.enable = true;
+            x11.enable = true;
+            gtk.enable = true;
+          };
         };
       };
   };
