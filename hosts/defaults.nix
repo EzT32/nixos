@@ -5,7 +5,7 @@
     nixos = { ... }: {
       nixpkgs.config.allowUnfree = true;
       system.stateVersion = "26.05";
-      environment.sessionvariables = {
+      environment.sessionVariables = {
         nixos_ozone_wl = "1";
         gdk_scale = "1.5";
         qt_scale_factor = "1";
