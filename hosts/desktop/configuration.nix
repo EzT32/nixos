@@ -1,8 +1,5 @@
 # hosts/desktop/configuration.nix
-{
-  den,
-  ...
-}:
+{ den, ... }:
 {
   den.aspects.desktop = {
     nixos = { ... }: {
@@ -10,13 +7,14 @@
       imports = [ ./_hardware-configuration.nix ];
     };
 
-    homeManager = { ... }: {
-      discord.vencord = false;
-    };
-
-    # List aspects to include
-    includes = [
-      den.aspects.discord
+    includes = with den.aspects; [
+      discord
+      hyprland
+      wooting
+      steam
+      lact
+      prismlauncher
+      syncplay
     ];
   };
 }
