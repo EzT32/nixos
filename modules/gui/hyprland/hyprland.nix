@@ -1,6 +1,15 @@
 # modules/gui/hyprland/hyprland.nix
+{ den, ... }:
 {
   den.aspects.hyprland = {
+    includes = [
+      den.aspects.hyprland-launcher-binds
+      den.aspects.hyprland-media-binds
+      den.aspects.hyprland-mouse-binds
+      den.aspects.hyprland-window-binds
+      den.aspects.hyprland-workspace-binds
+    ];
+
     homeManager =
       { config, lib, ... }:
       {
@@ -15,10 +24,11 @@
 
         wayland.windowManager.hyprland = {
           enable = true;
+          configType = "hyprlang";
+
           xwayland.enable = true;
           systemd.enable = false;
-
-          configType = "hyprlang";
+          misc.mouse_move_focuses_monitor = false;
 
           settings = {
             xwayland.force_zero_scaling = true;
@@ -31,17 +41,12 @@
             input = {
               kb_layout = "no";
               sensitivity = config.hyprland.sensitivity;
+              follow_mouse = 2;
 
               touchpad = {
                 natural_scroll = true;
                 disable_while_typing = false;
               };
-
-              follow_mouse = 2;
-            };
-
-            misc = {
-              mouse_move_focuses_monitor = false;
             };
 
             monitor = [
