@@ -56,10 +56,10 @@
           };
         };
       };
-  };
 
-  nixos = _: {
-    programs.hyprland.enable = true;
-    programs.hyprland.withUWSM = true;
+    nixos = _: {
+      programs.hyprland.enable = true;
+      programs.hyprland.withUWSM = true;
+    };
   };
 }
