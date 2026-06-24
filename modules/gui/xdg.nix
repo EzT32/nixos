@@ -1,6 +1,6 @@
 # modules/desktop/xdg.nix
 {
-  den.aspects.xdx = {
+  den.aspects.xdg = {
     nixos = { pkgs, ... }: {
       xdg.portal = {
         enable = true;
