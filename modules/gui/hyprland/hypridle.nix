@@ -1,62 +1,45 @@
-# modules/desktop/hyprland/hypridle.nix
+# modules/gui/hyprland/hypridle.nix
+{ den, ... }:
 {
-  config,
-  lib,
-  ...
-}:
-let
-  cfg = config.modules.desktop.hyprland.hypridle;
-  enableGroups = config.modules.enableGroups;
-  user = config.modules.system.user;
-in
-{
-  options.modules.desktop.hyprland.hypridle = {
-    enable = lib.options.mkUnsetOption "Custom module for hypridle";
+  den.aspects.hypridle = {
+    includes = [ den.aspects.hyprlock ];
 
-    lockTimeout = lib.mkOption {
-      type = lib.types.int;
-      default = 900;
-      description = "Seconds before locking screen";
-    };
+    homeManager = { config, lib, ... }: {
+      options.hyprland.hypridle = {
+        lockTimeout = lib.mkOption {
+          type = lib.types.int;
+          default = 900;
+          description = "Seconds before locking screen";
+        };
 
-    dpmsTimeout = lib.mkOption {
-      type = lib.types.int;
-      default = 900;
-      description = "Seconds before turning off display";
-    };
-  };
-
-  config =
-    lib.mkIf
-      (lib.modules.isEnabled cfg.enable [
-        "hyprland"
-      ] enableGroups)
-      {
-
-        home-manager.users.${user.username} = {
-          enable = true;
-
-          services.hypridle = {
-            settings = {
-              general = {
-                after_sleep_cmd = "hyprctl dispatch dpms on";
-                ignore_dbus_inhibit = false;
-                lock_cmd = "hyprlock";
-              };
-
-              listener = [
-                {
-                  timeout = cfg.lockTimeout;
-                  on-timeout = "hyprlock";
-                }
-                {
-                  timeout = cfg.dpmsTimeout;
-                  on-timeout = "hyprctl dispatch dpms off";
-                  on-resume = "hyprctl dispatch dpms on";
-                }
-              ];
-            };
-          };
+        dpmsTimeout = lib.mkOption {
+          type = lib.types.int;
+          default = 900;
+          description = "Seconds before turning off display";
         };
       };
+
+      services.hypridle = {
+        settings = {
+          general = {
+            after_sleep_cmd = "hyprctl dispatch dpms on";
+            ignore_dbus_inhibit = false;
+            lock_cmd = "hyprlock";
+          };
+
+          listener = [
+            {
+              timeout = config.hyprland.hypridle.lockTimeout;
+              on-timeout = "hyprlock";
+            }
+            {
+              timeout = config.hyprland.hypridle.dpmsTimeout;
+              on-timeout = "hyprctl dispatch dpms off";
+              on-resume = "hyprctl dispatch dpms on";
+            }
+          ];
+        };
+      };
+    };
+  };
 }

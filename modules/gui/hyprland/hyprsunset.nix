@@ -1,61 +1,40 @@
-# modules/desktop/hyprland/hyprsunset.nix
+# modules/gui/hyprland/hyprsunset.nix
 {
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-let
-  cfg = config.modules.desktop.hyprland.hyprsunset;
-  enableGroups = config.modules.enableGroups;
-  user = config.modules.system.user;
-
-  hyprctl-bin = "${pkgs.hyprland}/bin/hyprctl";
-
-  toggleScript = pkgs.writeShellScript "hyprsunset-toggle" ''
-    STATE_FILE="''${XDG_RUNTIME_DIR}/hyprsunset-on"
-
-    if [ -f "$STATE_FILE" ]; then
-      rm -f "$STATE_FILE"
-      ${hyprctl-bin} hyprsunset identity
-    else
-      touch "$STATE_FILE"
-      ${hyprctl-bin} hyprsunset temperature ${toString cfg.temperature}
-    fi
-  '';
-in
-{
-  options.modules.desktop.hyprland.hyprsunset = {
-    enable = lib.options.mkUnsetOption "hyprsunset blue-light filter";
-
-    user = lib.mkOption {
-      type = lib.types.str;
-      default = "ezt";
-      description = "The home-manager user to configure hyprsunset for.";
-    };
-
-    temperature = lib.mkOption {
-      type = lib.types.int;
-      default = 4500;
-      description = "Colour temperature (Kelvin) applied when the warm filter is active.";
-    };
-  };
-
-  config =
-    lib.mkIf
-      (lib.modules.isEnabled cfg.enable [
-        "hyprland"
-      ] enableGroups)
+  den.aspects.hyprsunset = {
+    homeManager =
       {
+        config,
+        lib,
+        pkgs,
+        ...
+      }:
+      let
+        cfg = config.hyprland.hyprsunset;
 
-        home-manager.users.${user.username} = {
-          services.hyprsunset.enable = true;
+        toggleScript = pkgs.writeShellScript "hyprsunset-toggle" ''
+          state_file="$XDG_RUNTIME_DIR/hyprsunset-on"
 
-          wayland.windowManager.hyprland.settings = {
-            bindl = [
-              "SUPERSHIFT, n, exec, ${toggleScript}"
-            ];
-          };
+          if [ -f "$state_file" ]; then
+            rm -f "$state_file"
+            hyprctl hyprsunset identity
+          else
+            touch "$state_file"
+            hyprctl hyprsunset temperature ${toString cfg.temperature}
+          fi
+        '';
+      in
+      {
+        options.hyprland.hyprsunset.temperature = lib.mkOption {
+          type = lib.types.int;
+          default = 4500;
+          description = "Colour temperature (Kelvin) applied when the warm filter is active.";
         };
+
+        services.hyprsunset.enable = true;
+
+        wayland.windowManager.hyprland.settings.bindl = [
+          "SUPERSHIFT, n, exec, ${toggleScript}"
+        ];
       };
+  };
 }

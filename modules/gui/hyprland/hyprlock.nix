@@ -1,52 +1,40 @@
-# modules/desktop/hyprland/hyprlock.nix
+# modules/gui/hyprland/hyprlock.nix
 {
-  config,
-  lib,
-  ...
-}:
-let
-  cfg = config.modules.desktop.hyprland.hyprlock;
-  enableGroups = config.modules.enableGroups;
-  user = config.modules.system.user;
-in
-{
-  options.modules.desktop.hyprland.hyprlock = {
-    enable = lib.options.mkUnsetOption "Custom module for hyprlock";
-
-    path = lib.mkOption {
-      type = lib.types.path;
-      default = "${config.home-manager.users.ezt.home.homeDirectory}/nixos/wallpapers";
-      description = "Path to the directory containing wallpapers for hyprlock.";
-      example = "~/path/to/wallpaper/folder";
-    };
-
-    wallpaper = lib.mkOption {
-      type = lib.types.str;
-      default = "Scatter_gruvbox.png";
-      description = "Wallpaper file to use for hyprlock background.";
-      example = "Wallpaper.png";
-    };
-
-    grace = lib.mkOption {
-      type = lib.types.int;
-      default = 60;
-      description = "Number of seconds grace period before locking again.";
-      example = 60;
-    };
-  };
-
-  config =
-    lib.mkIf
-      (lib.modules.isEnabled cfg.enable [
-        "hyprland"
-      ] enableGroups)
+  den.aspects.hyprlock = {
+    homeManager =
+      { config, lib, ... }:
+      let
+        cfg = config.hyprland.hyprlock;
+      in
       {
+        options.hyprland.hyprlock = {
+          path = lib.mkOption {
+            type = lib.types.path;
+            default = "${config.home-manager.users.ezt.home.homeDirectory}/nixos/wallpapers";
+            description = "Path to the directory containing wallpapers for hyprlock.";
+            example = "~/path/to/wallpaper/folder";
+          };
 
-        home-manager.users.${user.username} = {
+          wallpaper = lib.mkOption {
+            type = lib.types.str;
+            default = "Scatter_gruvbox.png";
+            description = "Wallpaper file to use for hyprlock background.";
+            example = "Wallpaper.png";
+          };
+
+          grace = lib.mkOption {
+            type = lib.types.int;
+            default = 60;
+            description = "Number of seconds grace period before locking again.";
+            example = 60;
+          };
+        };
+
+        programs.hyprlock = {
           settings = {
             general = {
               disable_loading_bar = true;
-              grace = cfg.grace;
+              grace = config.hyprland.hyprlock.grace;
               hide_cursor = true;
               no_fade_in = false;
             };
@@ -77,4 +65,5 @@ in
           };
         };
       };
+  };
 }
