@@ -2,8 +2,10 @@
 { den, ... }:
 {
   den.default = {
-    nixos = { ... }: {
+    nixos = _: {
       system.stateVersion = "26.05";
+      home-manager.useGlobalPkgs = true;
+
       environment.sessionVariables = {
         nixos_ozone_wl = "1";
         gdk_scale = "1.5";
@@ -14,7 +16,7 @@
       };
     };
 
-    homeManager = { ... }: {
+    homeManager = _: {
       home.stateVersion = "26.05";
 
       git.userName = "EzT32";

@@ -2,7 +2,6 @@
 { den, ... }:
 {
   den.aspects.desktop = {
-
     nixos = { ... }: {
       networking.hostName = "desktop";
       imports = [ ./_hardware-configuration.nix ];

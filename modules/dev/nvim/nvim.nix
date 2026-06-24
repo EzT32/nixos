@@ -21,7 +21,6 @@
 
           vhdl-ls
           ghdl
-          vsg
 
           asm-lsp
           asmfmt
