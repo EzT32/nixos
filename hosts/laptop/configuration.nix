@@ -8,7 +8,6 @@
     };
 
     includes = with den.aspects; [
-      hyprland
       hyprland-laptop-binds
       blueman
     ];

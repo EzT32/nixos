@@ -13,26 +13,24 @@
     homeManager =
       { config, lib, ... }:
       {
-        options.hyprland = {
-          sensitivity = lib.mkOption {
-            type = lib.types.float;
-            default = 0.0;
-            description = "Hyprland sensitivity (supports negative numbers).";
-            example = -0.5;
-          };
+        options.hyprland.sensitivity = lib.mkOption {
+          type = lib.types.float;
+          default = 0.0;
+          description = "Hyprland sensitivity (supports negative numbers).";
+          example = -0.5;
         };
 
-        wayland.windowManager.hyprland = {
+        config.wayland.windowManager.hyprland = {
           enable = true;
           configType = "hyprlang";
 
           xwayland.enable = true;
           systemd.enable = false;
-          misc.mouse_move_focuses_monitor = false;
 
           settings = {
             xwayland.force_zero_scaling = true;
 
+            misc.mouse_move_focuses_monitor = false;
             general = {
               gaps_in = 2;
               gaps_out = 4;

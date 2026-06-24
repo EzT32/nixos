@@ -1,6 +1,8 @@
 # modules/dev/vscode.nix
-{
+{ den, ... }: {
   den.aspects.vscode = {
+    includes = [ (den.batteries.unfree [ "vscode" ]) ];
+
     homeManager =
       { pkgs, ... }:
       let

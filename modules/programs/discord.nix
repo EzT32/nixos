@@ -1,6 +1,9 @@
 # modules/programs/discord.nix
+{ den, ... }:
 {
   den.aspects.discord = {
+    includes = [ (den.batteries.unfree [ "discord" ]) ];
+
     homeManager =
       {
         config,

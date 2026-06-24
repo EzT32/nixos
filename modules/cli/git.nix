@@ -21,18 +21,19 @@
           };
         };
 
-        programs.git = {
-          enable = true;
-          package = pkgs.gitFull;
+        config = {
+          programs.git = {
+            enable = true;
+            package = pkgs.gitFull;
 
-          settings = {
-            user = {
-              name = config.git.userName;
-              email = config.git.userEmail;
+            settings = {
+              user = {
+                name = config.git.userName;
+                email = config.git.userEmail;
+              };
+              credential.helper = "libsecret";
             };
-            credential.helper = "libsecret";
           };
-
           home.packages = with pkgs; [
             libsecret
           ];

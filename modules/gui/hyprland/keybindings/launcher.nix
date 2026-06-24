@@ -2,15 +2,17 @@
 {
   den.aspects.hyprland-launcher-binds = {
     homeManager = _: {
-      wayland.windowManager.hyprland.settings = {
-        bind = [
-          "SUPER, T, exec, kitty"
-          "SUPERSHIFT, B, exec, firefox"
-        ];
+      config = {
+        wayland.windowManager.hyprland.settings = {
+          bind = [
+            "SUPER, T, exec, kitty"
+            "SUPERSHIFT, B, exec, firefox"
+          ];
 
-        bindr = [
-          "SUPER, SUPER_L, exec, kill $(pidof rofi) || rofi -show drun"
-        ];
+          bindr = [
+            "SUPER, SUPER_L, exec, kill $(pidof rofi) || rofi -show drun"
+          ];
+        };
       };
     };
   };

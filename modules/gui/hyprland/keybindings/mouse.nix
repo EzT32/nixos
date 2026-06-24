@@ -2,11 +2,13 @@
 {
   den.aspects.hyprland-mouse-binds = {
     homeManager = _: {
-      wayland.windowManager.hyprland.settings = {
-        bindm = [
-          "SUPER, mouse:272, movewindow"
-          "SUPER, mouse:273, resizewindow"
-        ];
+      config = {
+        wayland.windowManager.hyprland.settings = {
+          bindm = [
+            "SUPER, mouse:272, movewindow"
+            "SUPER, mouse:273, resizewindow"
+          ];
+        };
       };
     };
   };

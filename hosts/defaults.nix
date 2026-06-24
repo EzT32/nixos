@@ -3,7 +3,6 @@
 {
   den.default = {
     nixos = { ... }: {
-      nixpkgs.config.allowUnfree = true;
       system.stateVersion = "26.05";
       environment.sessionVariables = {
         nixos_ozone_wl = "1";
@@ -17,9 +16,13 @@
 
     homeManager = { ... }: {
       home.stateVersion = "26.05";
+
+      git.userName = "EzT32";
+      git.userEmail = "theodor.berghansen@icloud.com";
     };
 
     includes = with den.aspects; [
+      hyprland
       nix
       locale
       fonts
@@ -38,14 +41,12 @@
       eza
       ssh
       firefox
-      vscode
+      discord
       python
       java
       nvim
       onlyoffice
-      teamspeak
       spotify
-      obsidian
       vlc
       mpv
       pinta

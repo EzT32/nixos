@@ -29,15 +29,17 @@
           example = 10;
         };
 
-        wayland.windowManager.hyprland.settings = {
-          bindl = [
-            ", XF86AudioMicMute, exec, ${toggleMic}"
-          ];
+        config = {
+          wayland.windowManager.hyprland.settings = {
+            bindl = [
+              ", XF86AudioMicMute, exec, ${toggleMic}"
+            ];
 
-          binde = [
-            ", XF86MonBrightnessDown, exec, brightnessctl set ${toString cfg.brightnessStep}%-"
-            ", XF86MonBrightnessUp, exec, brightnessctl set ${toString cfg.brightnessStep}%+"
-          ];
+            binde = [
+              ", XF86MonBrightnessDown, exec, brightnessctl set ${toString cfg.brightnessStep}%-"
+              ", XF86MonBrightnessUp, exec, brightnessctl set ${toString cfg.brightnessStep}%+"
+            ];
+          };
         };
       };
 

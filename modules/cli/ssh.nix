@@ -4,7 +4,7 @@
     homeManager =
       { config, ... }:
       let
-        homeDir = config.home.homeDir;
+        homeDir = config.home.homeDirectory;
       in
       {
         services.ssh-agent.enable = true;
