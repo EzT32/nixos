@@ -49,27 +49,29 @@
           };
         };
 
-        config.programs.kitty = {
-          enable = true;
+        config = {
+          programs.kitty = {
+            enable = true;
 
-          extraConfig = builtins.readFile themePath;
+            extraConfig = builtins.readFile themePath;
 
-          font = {
-            name = cfg.font.name;
-            size = cfg.font.size;
+            font = {
+              name = cfg.font.name;
+              size = cfg.font.size;
+            };
+
+            settings = {
+              window_padding_width = 0;
+              enable_audio_bell = false;
+              linux_display_server = "wayland";
+              background_opacity = "0.8";
+            };
           };
 
-          settings = {
-            window_padding_width = 0;
-            enable_audio_bell = false;
-            linux_display_server = "wayland";
-            background_opacity = "0.8";
-          };
+          home.packages = with pkgs; [
+            nerd-fonts.fira-code
+          ];
         };
-
-        home.packages = with pkgs; [
-          nerd-fonts.fira-code
-        ];
       };
   };
 }
