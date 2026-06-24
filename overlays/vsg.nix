@@ -1,4 +1,5 @@
-{ ... }:
+# overlays/vsg.nix
+_:
 {
   nixpkgs.overlays = [
     (final: prev: {

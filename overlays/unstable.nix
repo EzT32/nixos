@@ -1,7 +1,8 @@
-_: {
+# overlays/unstable.nix
+{ inputs, ... }: {
   nixpkgs.overlays = [
     (final: prev: {
-      unstable = import.nixpkgs-unstable {
+      unstable = inputs.nixpkgs-unstable {
         inherit (prev) system;
         config.allowUnfree = true;
       };
