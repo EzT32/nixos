@@ -1,28 +1,10 @@
 # modules/programs/lact.nix
 {
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-let
-  cfg = config.modules.programs.lact;
-  enableGroups = config.modules.enableGroups;
-in
-{
-  options.modules.programs.lact = {
-    enable = lib.options.mkUnsetOption "Lact";
+  den.aspects.lact = {
+    nixos = { pkgs, ... }: {
+      environment.systemPackages = [ pkgs.lact ];
+      systemd.packages = [ pkgs.lact ]; # registers the lactd service unit
+      systemd.services.lactd.wantedBy = [ "multi-user.target" ]; # auto-starts it
+    };
   };
-
-  config =
-    lib.mkIf
-      (lib.modules.isEnabled cfg.enable [
-        "programs"
-        "amd"
-      ] enableGroups)
-      {
-        environment.systemPackages = [ pkgs.lact ];
-        systemd.packages = [ pkgs.lact ]; # registers the lactd service unit
-        systemd.services.lactd.wantedBy = [ "multi-user.target" ]; # auto-starts it
-      };
 }

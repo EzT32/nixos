@@ -1,35 +1,14 @@
 # modules/programs/blueman.nix
 {
-  config,
-  lib,
-  ...
-}:
-let
-  cfg = config.modules.programs.blueman;
-  enableGroups = config.modules.enableGroups;
-  user = config.modules.system.user;
-in
-{
-  options.modules.programs.blueman = {
-    enable = lib.options.mkUnsetOption "Blueman";
-    startup = lib.mkEnableOption "Launch blueman on startup";
+  den.aspects.blueman = {
+    homeManager = { config, lib, ... }: {
+      options.blueman.startup = lib.mkEnableOption "Launch blueman on startup";
+
+      services.blueman.enable = true;
+      xdg.configFile."autostart/blueman.desktop".text = ''
+        [Desktop Entry]
+        Hidden=${lib.boolToString (!config.programs.blueman.startup)}
+      '';
+    };
   };
-
-  config =
-    lib.mkIf
-      (lib.modules.isEnabled cfg.enable [
-        "programs"
-        "bluetooth"
-      ] enableGroups)
-      {
-
-        services.blueman.enable = true;
-
-        home-manager.users.${user.username} = {
-          xdg.configFile."autostart/blueman.desktop".text = ''
-            [Desktop Entry]
-            Hidden=${lib.boolToString (!cfg.startup)}
-          '';
-        };
-      };
 }
