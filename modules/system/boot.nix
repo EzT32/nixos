@@ -1,20 +1,24 @@
-{ pkgs, ... }:
+# modules/system/boot.nix
 {
-  boot = {
-    loader = {
-      efi.canTouchEfiVariables = true;
+  den.aspects.boot = {
+    nixos = { pkgs, ... }: {
+      boot = {
+        loader = {
+          efi.canTouchEfiVariables = true;
 
-      systemd-boot = {
-        enable = true;
+          systemd-boot = {
+            enable = true;
 
-        configurationLimit = 5;
+            configurationLimit = 5;
+          };
+        };
+        kernelPackages = pkgs.linuxPackages_latest;
+        kernelParams = [
+          "video=HDMI-A-1:1920x1080@144"
+          "pcie_aspm=off"
+          "amdgpu.runpm=0"
+        ];
       };
     };
-    kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = [
-      "video=HDMI-A-1:1920x1080@144"
-      "pcie_aspm=off"
-      "amdgpu.runpm=0"
-    ];
   };
 }

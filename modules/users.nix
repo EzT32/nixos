@@ -6,5 +6,9 @@
       den.batteries.define-user
       den.batteries.primary-user
     ];
+
+    user = {
+      extraGroups = [ "video" ];
+    };
   };
 }

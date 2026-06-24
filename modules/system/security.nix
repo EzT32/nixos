@@ -1,9 +1,13 @@
-{ ... }:
+# modules/system/security.nix
 {
-  security = {
-    rtkit.enable = true;
-    pam.services.gdm-password.enableGnomeKeyring = true;
-    sudo.extraConfig = "Defaults timestamp_timeout=15";
+  den.aspects.security = {
+    nixos = _: {
+      security = {
+        rtkit.enable = true;
+        pam.services.gdm-password.enableGnomeKeyring = true;
+        sudo.extraConfig = "Defaults timestamp_timeout=15";
+      };
+      programs.gnupg.agent.enable = true;
+    };
   };
-  programs.gnupg.agent.enable = true;
 }

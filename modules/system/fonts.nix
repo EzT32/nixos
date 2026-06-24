@@ -1,25 +1,12 @@
-# modules/fonts/fonts.nix
+# modules/system/fonts.nix
 {
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-let
-  enableGroups = config.modules.enableGroups;
-in
-{
-  config =
-    lib.mkIf
-      (lib.modules.inGroups [
-        "fonts"
-      ] enableGroups)
-      {
-
-        fonts = {
-          packages = with pkgs; [
-            corefonts
-          ];
-        };
+  den.aspects.fonts = {
+    nixos = { pkgs, ... }: {
+      fonts = {
+        packages = with pkgs; [
+          corefonts
+        ];
       };
+    };
+  };
 }
