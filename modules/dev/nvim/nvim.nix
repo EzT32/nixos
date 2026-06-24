@@ -1,23 +1,7 @@
 # modules/dev/nvim/nvim.nix
 {
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-let
-  cfg = config.modules.dev.nvim;
-  enableGroups = config.modules.enableGroups;
-  user = config.modules.system.user;
-in
-{
-  options.modules.dev.nvim = {
-    enable = lib.options.mkUnsetOption "Neovim";
-  };
-
-  config = lib.mkIf (lib.modules.isEnabled cfg.enable [ "dev" ] enableGroups) {
-
-    home-manager.users.${user.username} = {
+  den.aspects.nvim = {
+    homeManager = { pkgs, ... }: {
       programs.neovim = {
         enable = true;
 
@@ -95,9 +79,11 @@ in
       xdg.configFile."nvim/lua".source = ./lua;
     };
 
-    # TODO: add support for more filetypes
-    environment.systemPackages = with pkgs; [
-      nixfmt-tree
-    ];
+    nixos = { pkgs, ... }: {
+      # TODO: add support for more filetypes
+      environment.systemPackages = with pkgs; [
+        nixfmt-tree
+      ];
+    };
   };
 }
