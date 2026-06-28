@@ -1,6 +1,7 @@
 # modules/programs/blueman.nix
-{
+{ den, ... }: {
   den.aspects.blueman = {
+    includes = with den.aspects; [ bluetooth ];
     homeManager = { config, lib, ... }: {
       options.blueman.startup = lib.mkEnableOption "Launch blueman on startup";
 
