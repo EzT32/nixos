@@ -25,7 +25,6 @@
       sddm
       bluetooth
       bash
-      zsh
       git
       core-cli
       ssh
