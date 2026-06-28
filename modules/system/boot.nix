@@ -15,8 +15,7 @@
         kernelPackages = pkgs.linuxPackages_latest;
         kernelParams = [
           "video=HDMI-A-1:1920x1080@144"
-          "pcie_aspm=off"
-          "amdgpu.runpm=0"
+          "amdgpu.ppfeaturemask=0xffffffff"
         ];
       };
     };

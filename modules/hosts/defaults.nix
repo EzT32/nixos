@@ -1,26 +1,15 @@
-# hosts/defaults.nix
-{ den, ... }:
-{
+# modules/hosts/defaults.nix
+{ den, ... }: {
   den.default = {
-    nixos = _: {
+    nixos = {
       system.stateVersion = "26.05";
       home-manager.useGlobalPkgs = true;
-
-      environment.sessionVariables = {
-        nixos_ozone_wl = "1";
-        gdk_scale = "1.5";
-        qt_scale_factor = "1";
-
-        wlr_no_hardware_cursors = "1";
-        editor = "nvim";
-      };
+      nixpkgs.config.allowUnfree = true;
     };
 
-    homeManager = _: {
+    homeManager = {
       home.stateVersion = "26.05";
-
-      git.userName = "EzT32";
-      git.userEmail = "theodor.berghansen@icloud.com";
+      home.sessionVariables.EDITOR = "nvim";
     };
 
     includes = with den.aspects; [

@@ -1,14 +1,6 @@
 # modules/programs/steam.nix
-{ den, ... }:
-{
+_: {
   den.aspects.steam = {
-    includes = [
-      (den.batteries.unfree [
-        "steam"
-        "steam-unwrapped"
-      ])
-    ];
-
     nixos = { pkgs, ... }: {
       programs.steam = {
         enable = true;

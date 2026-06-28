@@ -1,8 +1,6 @@
 # modules/programs/obsidian.nix
-{ den, ... }:
-{
+_: {
   den.aspects.obsidian = {
-    includes = [ (den.batteries.unfree [ "obsidian" ]) ];
     homeManager =
       {
         config,

@@ -7,6 +7,11 @@
       den.batteries.primary-user
     ];
 
+    homeManager = {
+      git.userName = "EzT32";
+      git.userEmail = "theodor.berghansen@icloud.com";
+    };
+
     user = {
       extraGroups = [ "video" ];
     };

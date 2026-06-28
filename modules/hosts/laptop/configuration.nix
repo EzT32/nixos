@@ -1,4 +1,4 @@
-# hosts/laptop/configuration.nix
+# modules/hosts/laptop/configuration.nix
 { den, ... }:
 {
   den.aspects.laptop = {

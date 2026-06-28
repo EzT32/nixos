@@ -1,4 +1,4 @@
-# hosts/desktop/configuration.nix
+# modules/hosts/desktop/configuration.nix
 { den, ... }:
 {
   den.aspects.desktop = {

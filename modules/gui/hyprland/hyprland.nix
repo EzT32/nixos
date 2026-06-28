@@ -58,9 +58,17 @@
         };
       };
 
-    nixos = _: {
+    nixos = {
       programs.hyprland.enable = true;
       programs.hyprland.withUWSM = true;
+
+      environment.sessionVariables = {
+        nixos_ozone_wl = "1";
+        gdk_scale = "1.5";
+        qt_scale_factor = "1";
+
+        wlr_no_hardware_cursors = "1";
+      };
     };
   };
 }
