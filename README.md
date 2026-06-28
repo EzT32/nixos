@@ -13,9 +13,6 @@ An attribute in the flake's outputs that `nixos-rebuild` knows to look at. When 
 # General structure
 ```
 .
-├── hosts
-│   ├── desktop
-│   └── laptop
 ├── modules
 │   ├── cli
 │   ├── dev
@@ -23,6 +20,9 @@ An attribute in the flake's outputs that `nixos-rebuild` knows to look at. When 
 │   ├── gui
 │   │   ├── hyprland
 │   │   └── waybar
+│   ├── hosts
+│   │   ├── desktop
+│   │   └── laptop
 │   ├── programs
 │   ├── services
 │   └── system
