@@ -10,6 +10,10 @@
     homeManager = {
       git.userName = "EzT32";
       git.userEmail = "theodor.berghansen@icloud.com";
+
+      systemd.user.sessionVariables = {
+        EDITOR = "nvim";
+      };
     };
 
     user = {

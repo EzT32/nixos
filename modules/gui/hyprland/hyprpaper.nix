@@ -1,6 +1,5 @@
 # modules/gui/hyprland/hyprpaper.nix
-{ self, ... }:
-{
+{ self, ... }: {
   den.aspects.hyprpaper = {
     homeManager =
       {

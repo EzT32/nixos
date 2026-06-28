@@ -6,10 +6,6 @@
         enable = true;
         autosuggestion.enable = true;
         enableCompletion = true;
-
-        sessionVariables = {
-          EDITOR = "nvim";
-        };
       };
     };
   };

@@ -1,5 +1,10 @@
 # modules/den.nix
-{ inputs, lib, ... }:
+{
+  den,
+  inputs,
+  lib,
+  ...
+}:
 {
   imports = [ inputs.den.flakeModule ];
 
