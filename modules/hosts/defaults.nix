@@ -28,8 +28,6 @@
       zsh
       git
       core-cli
-      zoxide
-      eza
       ssh
       firefox
       discord

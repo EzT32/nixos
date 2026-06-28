@@ -1,10 +1,13 @@
 # modules/cli/bash.nix
-{
+{ den, ... }: {
   den.aspects.bash = {
-    homeManager = _: {
-      programs.bash = {
-        enable = true;
-      };
+    inlcudes = with den.aspects; [
+      zoxide
+      eza
+    ];
+
+    homeManager = {
+      programs.bash.enable = true;
     };
   };
 }

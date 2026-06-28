@@ -1,7 +1,7 @@
 # modules/cli/eza.nix
 {
   den.aspects.eza = {
-    homeManager = _: {
+    homeManager = {
       programs.eza.enable = true;
     };
   };
