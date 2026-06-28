@@ -1,11 +1,12 @@
 # modules/hosts/laptop/configuration.nix
-{ den, ... }:
+{ den, inputs, ... }:
 {
   den.aspects.laptop = {
-    nixos = { ... }: {
+    nixos = {
       networking.hostName = "laptop";
       imports = [
         ./_hardware-configuration.nix
+        inputs.nixos-hardware.nixosModules.lenovo-thinkpad-e14-amd
       ];
     };
 
