@@ -1,6 +1,10 @@
-{ pkgs, ... }:
+# modules/system/clipboard.nix
 {
-  environment.systemPackages = with pkgs; [
-    wl-clipboard
-  ];
+  den.aspects.clipboard = {
+    nixos = { pkgs, ... }: {
+      environment.systemPackages = with pkgs; [
+        wl-clipboard
+      ];
+    };
+  };
 }

@@ -6,6 +6,7 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     import-tree.url = "github:denful/import-tree";
+    den.url = "github:denful/den";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
@@ -23,7 +24,9 @@
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "x86_64-linux" ];
 
-      imports = [ (inputs.import-tree ./hosts) ];
+      imports = [
+        (inputs.import-tree ./modules)
+      ];
 
       # Scopes pkgs to the current system, no architecture def needed.
       perSystem = { pkgs, ... }: {

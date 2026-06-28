@@ -1,3 +1,8 @@
+# modules/system/wooting.nix
 _: {
-  hardware.wooting.enable = true;
+  den.aspects.wooting = {
+    nixos = _: {
+      hardware.wooting.enable = true;
+    };
+  };
 }

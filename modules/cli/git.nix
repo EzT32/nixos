@@ -1,55 +1,43 @@
 # modules/cli/git.nix
 {
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-let
-  cfg = config.modules.cli.git;
-  enableGroups = config.modules.enableGroups;
-  user = config.modules.system.user;
-in
-{
-  options.modules.cli.git = {
-    enable = lib.options.mkUnsetOption "Custom module for git";
-
-    userName = lib.mkOption {
-      type = lib.types.str;
-      example = "Username";
-    };
-
-    userEmail = lib.mkOption {
-      type = lib.types.str;
-      example = "username@gmail.com";
-    };
-  };
-
-  config =
-    lib.mkIf
-      (lib.modules.isEnabled cfg.enable [
-        "cli"
-        "dev"
-      ] enableGroups)
+  den.aspects.git = {
+    homeManager =
       {
+        config,
+        lib,
+        pkgs,
+        ...
+      }:
+      {
+        options.git = {
+          userName = lib.mkOption {
+            type = lib.types.str;
+            example = "Username";
+          };
 
-        home-manager.users.${user.username} = {
+          userEmail = lib.mkOption {
+            type = lib.types.str;
+            example = "username@gmail.com";
+          };
+        };
+
+        config = {
           programs.git = {
             enable = true;
             package = pkgs.gitFull;
 
             settings = {
               user = {
-                name = cfg.userName;
-                email = cfg.userEmail;
+                name = config.git.userName;
+                email = config.git.userEmail;
               };
               credential.helper = "libsecret";
             };
           };
-
           home.packages = with pkgs; [
             libsecret
           ];
         };
       };
+  };
 }

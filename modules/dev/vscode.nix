@@ -1,105 +1,92 @@
 # modules/dev/vscode.nix
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-let
-  cfg = config.modules.dev.vscode;
-  enableGroups = config.modules.enableGroups;
-  user = config.modules.system.user;
+_: {
+  den.aspects.vscode = {
+    homeManager =
+      { pkgs, ... }:
+      let
+        pythonEnv = pkgs.vscode.fhsWithPackages (p: [
+          (p.python3.withPackages (
+            ps: with ps; [
+              pip
+              ipykernel
+              jupyter
+              notebook
 
-  pythonEnv = pkgs.vscode.fhsWithPackages (p: [
-    (p.python3.withPackages (
-      ps: with ps; [
-        pip
-        ipykernel
-        jupyter
-        notebook
+              # IN1160
+              numpy
+              matplotlib
+              pandas
+              ipykernel
+              scikit-learn
+              seaborn
+              pyyaml
+              ipython
+              plotly
+              gymnasium
+              pygame
+              datasets
+              pkgs.openml
+            ]
+          ))
+        ]);
+      in
+      {
+        programs.vscode = {
+          enable = true;
+          package = pythonEnv;
+          mutableExtensionsDir = false;
 
-        # IN1160
-        numpy
-        matplotlib
-        pandas
-        ipykernel
-        scikit-learn
-        seaborn
-        pyyaml
-        ipython
-        plotly
-        gymnasium
-        pygame
-        datasets
-        pkgs.openml
-      ]
-    ))
-  ]);
-in
-{
-  options.modules.dev.vscode = {
-    enable = lib.options.mkUnsetOption "Visual Studio Code";
-  };
+          profiles.default = {
+            userSettings = {
+              # Formatting
+              "editor.formatOnSave" = true;
+              "[python]" = {
+                "editor.defaultFormatter" = "charliermarsh.ruff";
+              };
 
-  config = lib.mkIf (lib.modules.isEnabled cfg.enable [ "dev" ] enableGroups) {
+              "python.defaultInterpreterPath" = "/usr/bin/python";
 
-    home-manager.users.${user.username} = {
-      programs.vscode = {
-        enable = true;
-        package = pythonEnv;
-        mutableExtensionsDir = false;
+              # Ricing
+              "workbench.colorTheme" = "Gruvbox Dark Medium";
 
-        profiles.default = {
-          userSettings = {
-            # Formatting
-            "editor.formatOnSave" = true;
-            "[python]" = {
-              "editor.defaultFormatter" = "charliermarsh.ruff";
+              # LSP
+              "python.languageServer" = "Pylance";
+
+              # Wordwrap
+              "editor.wordWrap" = "on";
+
+              # AI slop
+              "chat.agent.enabled" = false;
+              "chat.disableAIFeatures" = true;
+
+              "extensions.autoUpdate" = false;
+              "extensions.autoCheckUpdates" = false;
+
+              "extensions.verifySignature" = false;
+
+              "workbench.startupEditor" = "none";
             };
 
-            "python.defaultInterpreterPath" = "/usr/bin/python";
+            extensions = with pkgs.vscode-extensions; [
+              ms-python.python
+              charliermarsh.ruff
+              ms-python.vscode-pylance
+              ms-toolsai.jupyter
+              ms-vscode.live-server
+              ms-vsliveshare.vsliveshare
+              ms-python.debugpy
 
-            # Ricing
-            "workbench.colorTheme" = "Gruvbox Dark Medium";
+              # Colortheme
+              jdinhlife.gruvbox
+              pkief.material-icon-theme
 
-            # LSP
-            "python.languageServer" = "Pylance";
+              # Docstrings
+              njpwerner.autodocstring
 
-            # Wordwrap
-            "editor.wordWrap" = "on";
-
-            # AI slop
-            "chat.agent.enabled" = false;
-            "chat.disableAIFeatures" = true;
-
-            "extensions.autoUpdate" = false;
-            "extensions.autoCheckUpdates" = false;
-
-            "extensions.verifySignature" = false;
-
-            "workbench.startupEditor" = "none";
+              tomoki1207.pdf
+            ];
           };
-
-          extensions = with pkgs.vscode-extensions; [
-            ms-python.python
-            charliermarsh.ruff
-            ms-python.vscode-pylance
-            ms-toolsai.jupyter
-            ms-vscode.live-server
-            ms-vsliveshare.vsliveshare
-            ms-python.debugpy
-
-            # Colortheme
-            jdinhlife.gruvbox
-            pkief.material-icon-theme
-
-            # Docstrings
-            njpwerner.autodocstring
-
-            tomoki1207.pdf
-          ];
         };
       };
-    };
   };
 }

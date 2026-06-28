@@ -1,10 +1,14 @@
-{ ... }:
+# modules/system/locale.nix
 {
-  time.timeZone = "Europe/Oslo";
+  den.aspects.locale = {
+    nixos = _: {
+      time.timeZone = "Europe/Oslo";
+      # Select internationalisation properties.
+      i18n.defaultLocale = "en_US.UTF-8";
 
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-  console = {
-    keyMap = "no";
+      console = {
+        keyMap = "no";
+      };
+    };
   };
 }

@@ -1,33 +1,13 @@
 # modules/cli/bash.nix
-{
-  config,
-  lib,
-  ...
-}:
-let
-  cfg = config.modules.cli.bash;
-  enableGroups = config.modules.enableGroups;
-  user = config.modules.system.user;
-in
-{
-  options.modules.cli.bash = {
-    enable = lib.options.mkUnsetOption "Bash";
+{ den, ... }: {
+  den.aspects.bash = {
+    inlcudes = with den.aspects; [
+      zoxide
+      eza
+    ];
+
+    homeManager = {
+      programs.bash.enable = true;
+    };
   };
-
-  config =
-    lib.mkIf
-      (lib.modules.isEnabled cfg.enable [
-        "cli"
-      ] enableGroups)
-      {
-        home-manager.users.${user.username} = {
-          programs.bash = {
-            enable = true;
-
-            initExtra = ''
-              [[ -f ~/.profile ]] && . ~/.profile
-            '';
-          };
-        };
-      };
 }

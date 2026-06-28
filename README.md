@@ -13,30 +13,19 @@ An attribute in the flake's outputs that `nixos-rebuild` knows to look at. When 
 # General structure
 ```
 .
-├── flake.lock
-├── flake.nix
-├── hosts
-│   ├── desktop
-│   │   ├── _hardware-configuration.nix
-│   │   └── configuration.nix
-│   └── laptop
-│       ├── _hardware-configuration.nix
-│       └── configuration.nix
-├── lib
-│   └── lib.nix
 ├── modules
-│   ├── cli/
-│   ├── desktop/
-│   ├── dev/
-│   ├── presets
-│   │   ├── desktop.nix
-│   │   ├── laptop.nix
-│   │   └── shared.nix
-│   ├── programs/
-│   ├── services/
+│   ├── cli
+│   ├── dev
+│   │   └── nvim
+│   ├── gui
+│   │   ├── hyprland
+│   │   └── waybar
+│   ├── hosts
+│   │   ├── desktop
+│   │   └── laptop
+│   ├── programs
+│   ├── services
 │   └── system
-│       ├── enable_groups.nix
-│       └── user.nix
-├── overlays/
-└── README.md <-- Current file
+├── overlays
+└── wallpapers
 ```
