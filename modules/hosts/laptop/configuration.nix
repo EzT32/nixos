@@ -14,6 +14,7 @@
       hyprland-laptop-binds
       blueman
       obsidian
+      steam
     ];
   };
 }

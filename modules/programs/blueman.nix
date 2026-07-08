@@ -2,14 +2,22 @@
 { den, ... }: {
   den.aspects.blueman = {
     includes = with den.aspects; [ bluetooth ];
-    homeManager = { config, lib, ... }: {
-      options.blueman.startup = lib.mkEnableOption "Launch blueman on startup";
 
+    nixos = {
       services.blueman.enable = true;
-      xdg.configFile."autostart/blueman.desktop".text = ''
-        [Desktop Entry]
-        Hidden=${lib.boolToString (!config.programs.blueman.startup)}
-      '';
+    };
+
+    provides.to-users = {
+      homeManager = { config, lib, ... }: {
+        options.blueman.startup = lib.mkEnableOption "Launch blueman on startup";
+
+        config = {
+          xdg.configFile."autostart/blueman.desktop".text = ''
+            [Desktop Entry]
+            Hidden=${lib.boolToString (!config.blueman.startup)}
+          '';
+        };
+      };
     };
   };
 }

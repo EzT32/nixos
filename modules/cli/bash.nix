@@ -1,7 +1,7 @@
 # modules/cli/bash.nix
 { den, ... }: {
   den.aspects.bash = {
-    inlcudes = with den.aspects; [
+    includes = with den.aspects; [
       zoxide
       eza
     ];
