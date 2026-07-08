@@ -1,10 +1,12 @@
 # modules/programs/syncplay.nix
 {
   den.aspects.syncplay = {
-    homeManager = { pkgs, ... }: {
-      home.packages = with pkgs; [
-        syncplay
-      ];
+    provides.to-users = {
+      homeManager = { pkgs, ... }: {
+        home.packages = with pkgs; [
+          syncplay
+        ];
+      };
     };
   };
 }
