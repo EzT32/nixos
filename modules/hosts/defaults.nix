@@ -13,6 +13,8 @@
     };
 
     includes = with den.aspects; [
+      den.batteries.host-aspects
+
       hyprland
       nix
       locale
