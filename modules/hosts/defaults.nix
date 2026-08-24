@@ -48,6 +48,9 @@
       rofi
       xdg
       waybar
+
+      zoxide
+      eza
     ];
   };
 }
