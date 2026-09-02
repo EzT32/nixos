@@ -33,7 +33,13 @@
           settings = {
             xwayland.force_zero_scaling = true;
 
-            misc.mouse_move_focuses_monitor = false;
+            misc = {
+              disable_hyprland_logo = true;
+              force_default_wallpaper = 0;
+              background_color = "rgb(282828)";
+              mouse_move_focuses_monitor = false;
+            };
+
             general = {
               gaps_in = 2;
               gaps_out = 4;
