@@ -12,10 +12,9 @@
             configurationLimit = 5;
           };
         };
-        kernelPackages = pkgs.linuxPackages_latest;
+        kernelPackages = pkgs.linuxPackages;
         kernelParams = [
           "video=HDMI-A-1:1920x1080@144"
-          "amdgpu.ppfeaturemask=0xffffffff"
         ];
       };
     };

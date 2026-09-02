@@ -18,6 +18,7 @@ _: {
           extraEnv = {
             MANGOHUD = "1";
             STEAM_SCALE = "0.75";
+            PROTON_ENABLE_NTSYNC = true;
           };
           extraPkgs = pkgs: [ pkgs.mangohud ];
         };
