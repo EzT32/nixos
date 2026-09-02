@@ -36,6 +36,7 @@
       onlyoffice
       spotify
       vlc
+      vscode
       mpv
       pinta
       kitty

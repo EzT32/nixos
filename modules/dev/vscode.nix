@@ -25,7 +25,6 @@ _: {
               gymnasium
               pygame
               datasets
-              pkgs.openml
             ]
           ))
         ]);
