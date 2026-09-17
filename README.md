@@ -16,9 +16,9 @@ An attribute in the flake's outputs that `nixos-rebuild` knows to look at. When 
 ├── modules
 │   ├── cli
 │   ├── dev
-│   │   └── nvim
 │   ├── gui
 │   │   ├── hyprland
+│   │   │   └── keybindings
 │   │   └── waybar
 │   ├── hosts
 │   │   ├── desktop
@@ -26,6 +26,5 @@ An attribute in the flake's outputs that `nixos-rebuild` knows to look at. When 
 │   ├── programs
 │   ├── services
 │   └── system
-├── overlays
 └── wallpapers
 ```
