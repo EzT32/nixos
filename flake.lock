@@ -135,6 +135,22 @@
         "type": "github"
       }
     },
+    "nvim-config": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1781313256,
+        "narHash": "sha256-EoRRqYS+TcPDM1XoMX3ILRG+7Fz6/9s8qLDEK2WVFN0=",
+        "owner": "EzT32",
+        "repo": "nvim",
+        "rev": "6bf7dd6a80a93fe9c26eda746fe2d681b073292d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "EzT32",
+        "repo": "nvim",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "den": "den",
@@ -143,7 +159,8 @@
         "import-tree": "import-tree",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_2",
-        "nixpkgs-unstable": "nixpkgs-unstable"
+        "nixpkgs-unstable": "nixpkgs-unstable",
+        "nvim-config": "nvim-config"
       }
     }
   },
