@@ -17,6 +17,11 @@
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
+
+    nvim-config = {
+      url = "github:EzT32/nvim";
+      flake = false;
+    };
   };
 
   outputs =
