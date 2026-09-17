@@ -1,8 +1,0 @@
-require('lsp.conform').setup()
-require('lsp.nix').setup()
-require('lsp.lua').setup()
-require('lsp.vhdl').setup()
-require('lsp.asm').setup()
-require('lsp.python').setup()
-require('lsp.c').setup()
-require('lsp.java').setup()

@@ -1,5 +1,5 @@
-# modules/dev/nvim/nvim.nix
-{
+# modules/dev/nvim.nix
+{ inputs, ... }: {
   den.aspects.nvim = {
     homeManager = { pkgs, ... }: {
       programs.neovim = {
@@ -74,8 +74,8 @@
         nixfmt
       ];
 
-      xdg.configFile."nvim/init.lua".source = ./init.lua;
-      xdg.configFile."nvim/lua".source = ./lua;
+      xdg.configFile."nvim/init.lua".source = "${inputs.nvim-config}/init.lua";
+      xdg.configFile."nvim/lua".source = "${inputs.nvim-config}/lua";
     };
 
     nixos = { pkgs, ... }: {
