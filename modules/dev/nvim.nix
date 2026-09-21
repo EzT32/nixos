@@ -10,8 +10,7 @@
       {
         home.packages = [
           inputs.nvim-config.packages.${system}.default
-        ]
-        ++ (with pkgs; [ nixfmt ]);
+        ];
       };
 
     nixos = { pkgs, ... }: {
