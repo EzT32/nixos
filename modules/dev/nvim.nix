@@ -12,9 +12,5 @@
           inputs.nvim-config.packages.${system}.default
         ];
       };
-
-    nixos = { pkgs, ... }: {
-      environment.systemPackages = with pkgs; [ nixfmt-tree ];
-    };
   };
 }
