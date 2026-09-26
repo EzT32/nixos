@@ -3,13 +3,10 @@
 {
   den.aspects.nvim = {
     homeManager =
-      { pkgs, ... }:
-      let
-        system = pkgs.stdenv.hostPlatform.system;
-      in
+      { pkgs, host, ... }:
       {
         home.packages = [
-          inputs.nvim-config.packages.${system}.default
+          inputs.nvim-config.packages.${host.system}.default
         ];
       };
   };
