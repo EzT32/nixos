@@ -21,6 +21,7 @@
         aria2
         alsa-utils
         wlr-randr
+        nixfmt-tree
       ];
     };
   };

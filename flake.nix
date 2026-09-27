@@ -20,8 +20,9 @@
 
     nvim-config = {
       url = "github:EzT32/nvim";
-      flake = false;
+      inputs.nixpkgs.follows = "nixpkgs";
     };
+
   };
 
   outputs =
