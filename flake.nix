@@ -7,7 +7,6 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     import-tree.url = "github:denful/import-tree";
     den.url = "github:denful/den";
-    nix-wrapper-modules.url = "github:nix-community/nix-wrapper-modules";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
