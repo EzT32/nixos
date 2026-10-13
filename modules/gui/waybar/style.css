@@ -19,6 +19,7 @@ tooltip {
 }
 
 #clock,
+#tray,
 #cpu,
 #memory,
 #battery,
@@ -71,7 +72,8 @@ tooltip {
 #cpu,
 #memory,
 #network,
-#wireplumber {
+#wireplumber,
+#tray {
     background-color: #303536;
     border: 2px solid #434a4c;
     color: #d4be98;
@@ -95,4 +97,12 @@ tooltip {
     background-color: #303536;
     border: 2px solid #434a4c;
     color: #7c6f64;
+}
+
+#tray > .needs-attention {
+    background-color: #e78a4e;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
 }
