@@ -22,6 +22,8 @@
         alsa-utils
         wlr-randr
         nixfmt-tree
+        htop
+        btop
       ];
     };
   };

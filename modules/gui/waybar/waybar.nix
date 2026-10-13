@@ -14,6 +14,7 @@
         modules-left = [ "hyprland/workspaces" ];
         modules-center = [ "clock" ];
         modules-right = [
+          "tray"
           "cpu"
           "memory"
           "battery"

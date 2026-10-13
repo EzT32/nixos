@@ -58,8 +58,8 @@
             };
 
             monitor = [
-              "desc:Acer Technologies KG271 TF5EE0098522, 1920x1080@143.98Hz, 0x0, auto"
-              "desc:BNQ BenQ GL2450 K2E02672019, preferred, auto-right, auto"
+              "DP-1, 2560x1440@240, 0x0, 1"
+              "DP-2, 2560x1440@240, 2560x0, 1"
             ];
           };
         };
