@@ -4,8 +4,15 @@ _: {
 
     nixos = { pkgs, ... }: {
       fonts = {
+        fontDir.enable = true;
+
         packages = with pkgs; [
           corefonts
+          stix-two
+          libertinus
+          lmmath
+          noto-fonts
+          dejavu_fonts
         ];
       };
     };
