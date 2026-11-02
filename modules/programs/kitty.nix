@@ -65,6 +65,7 @@
               enable_audio_bell = false;
               linux_display_server = "wayland";
               background_opacity = "0.8";
+              remember_window_size = false;
             };
           };
 
