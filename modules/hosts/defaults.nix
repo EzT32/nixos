@@ -40,6 +40,7 @@
       # programs
       firefox
       mpv
+      obs
       onlyoffice
       discord
       kitty
