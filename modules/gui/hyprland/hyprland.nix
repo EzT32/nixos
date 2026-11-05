@@ -61,6 +61,10 @@
               "DP-1, 2560x1440@240, 0x0, 1"
               "DP-2, 2560x1440@240, 2560x0, 1"
             ];
+
+            windowrule = [
+              "center on, match:float true"
+            ];
           };
         };
       };
@@ -70,11 +74,10 @@
       programs.hyprland.withUWSM = true;
 
       environment.sessionVariables = {
-        nixos_ozone_wl = "1";
-        gdk_scale = "1.5";
-        qt_scale_factor = "1";
-
-        wlr_no_hardware_cursors = "1";
+        NIXOS_OZONE_WL = "1";
+        GDK_SCALE = "1.5";
+        QT_SCALE_FACTOR = "1";
+        WLR_NO_HARDWARE_CURSORS = "1";
       };
     };
   };
