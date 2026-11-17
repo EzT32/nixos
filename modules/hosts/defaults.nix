@@ -18,6 +18,7 @@
       # cli
       bash
       core-cli
+      direnv
       eza
       git
       ssh
