@@ -1,38 +1,11 @@
 # modules/dev/vscode.nix
-_: {
+{
   den.aspects.vscode = {
     homeManager =
       { pkgs, ... }:
-      let
-        pythonEnv = pkgs.vscode.fhsWithPackages (p: [
-          (p.python3.withPackages (
-            ps: with ps; [
-              pip
-              ipykernel
-              jupyter
-              notebook
-
-              # IN1160
-              numpy
-              matplotlib
-              pandas
-              ipykernel
-              scikit-learn
-              seaborn
-              pyyaml
-              ipython
-              plotly
-              gymnasium
-              pygame
-              datasets
-            ]
-          ))
-        ]);
-      in
       {
         programs.vscode = {
           enable = true;
-          package = pythonEnv;
           mutableExtensionsDir = false;
 
           profiles.default = {
