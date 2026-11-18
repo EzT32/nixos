@@ -2,9 +2,13 @@
 {
   den.aspects.mpv = {
     homeManager = { pkgs, ... }: {
-      home.packages = with pkgs; [
-        mpv
-      ];
+      programs.mpv = {
+        enable = true;
+        config = {
+          keep-open = "yes";
+          loop-file = "inf";
+        };
+      };
     };
   };
 }
