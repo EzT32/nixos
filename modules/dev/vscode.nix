@@ -40,6 +40,7 @@
             };
 
             extensions = with pkgs.vscode-extensions; [
+              mkhl.direnv
               ms-python.python
               charliermarsh.ruff
               ms-python.vscode-pylance
